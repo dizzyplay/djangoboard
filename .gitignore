@@ -3,3 +3,4 @@
 *.pyc
 user.sh
 */__pycache__/*
+static/*
