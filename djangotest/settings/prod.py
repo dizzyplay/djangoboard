@@ -1,6 +1,7 @@
 from .settings import *
+import os
 
-DEBUG = True
+DEBUG = False
 
 DATABASES = {
     'default': {
@@ -13,4 +14,3 @@ DATABASES = {
 }
 
 
-STATIC_ROOT = os.path.join(BASE_DIR,'static')

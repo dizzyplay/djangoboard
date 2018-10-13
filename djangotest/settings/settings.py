@@ -25,7 +25,7 @@ SECRET_KEY = 'zd_mir=544%ai&$doxx--$^vk1487943@xvq#r=!x^npzk&^#z'
 # SECURITY WARNING: don't run with debug turned on in production!
 
 ALLOWED_HOSTS = ['*']
-
+DEBUG = True
 
 # Application definition
 
@@ -113,3 +113,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
