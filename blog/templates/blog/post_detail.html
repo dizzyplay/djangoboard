@@ -1,0 +1,14 @@
+<html>
+<head>
+
+</head>
+
+<body>
+{{ post.title }}
+<br>
+<p>
+    {{ post.content }}
+</p>
+<a href="{% url "blog:post_list" %}">목록으로</a>
+</body>
+</html>

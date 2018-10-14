@@ -4,7 +4,9 @@
 </head>
 <body>
 {% for post in qs %}
-    {{ post.pk }} {{ post.title }}<br>
+    <a href="{% url 'blog:post_detail' post.pk %}"> {{ post.pk }} {{ post.title }}</a><br>
 {% endfor %}
+<br>
+<a href="{% url 'blog:post_new' %}">글쓰기</a>
 </body>
 </html>
