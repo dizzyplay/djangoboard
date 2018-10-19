@@ -5,3 +5,4 @@ user.sh
 */__pycache__/*
 static/*
 venv/
+*/node_modules/*
