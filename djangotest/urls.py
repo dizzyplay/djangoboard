@@ -22,5 +22,4 @@ urlpatterns = [
     path('blog/', include('blog.urls', namespace='blog')),
 
     #rest api
-    re_path(r'^api/blog/', include('blog.api.urls', namespace='blog_api')),
 ]
