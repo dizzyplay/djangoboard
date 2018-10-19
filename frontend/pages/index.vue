@@ -2,7 +2,7 @@
     <div>
       <div v-for="(post, index) in listData" v-bind:key="index">
         <Card
-          v-bind:index="post.index"
+          v-bind:id="post.id"
           v-bind:title="post.title"
           v-bind:content="post.content"
           v-bind:created_at="post.created_at"
