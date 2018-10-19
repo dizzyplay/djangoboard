@@ -12,6 +12,9 @@
                     <div>
                       {{content}}
                     </div>
+                    <div>
+                      {{created_at}}
+                    </div>
                   </div>
                 </v-card-title>
               </v-flex>
