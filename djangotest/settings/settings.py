@@ -127,6 +127,7 @@ CORS_ORIGIN_WHITELIST = (
     'localhost:3000',
 )
 
+# for csrf failure
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
