@@ -8,6 +8,7 @@ from blog.models import Post
 class PostListAPIView(ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    permission_classes = ()
 
     def create(self, request, *args, **kwargs):
         serializer = PostCreateSerializer(data=request.data)
