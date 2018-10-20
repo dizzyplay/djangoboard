@@ -70,7 +70,7 @@
       // }
       async submit() {
         this.isLoading=true;
-        let res = await axios.post(`http://localhost:8000/blog/api/`, {
+        let res = await axios.post(`http://211.114.88.77/blog/api/`, {
           title: this.title,
           content: this.content,
         })

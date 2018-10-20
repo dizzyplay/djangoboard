@@ -1,8 +1,8 @@
 <template>
   <section class="container">
     <div>
-    <Toolbar/>
     <nuxt/>
+      <Toolbar/>
     </div>
   </section>
 </template>
