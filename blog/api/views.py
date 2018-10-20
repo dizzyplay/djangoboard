@@ -2,14 +2,12 @@ from .serializers import PostSerializer, PostCreateSerializer
 from rest_framework.generics import ListCreateAPIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.permissions import AllowAny
 from blog.models import Post
 
 
 class PostListAPIView(ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = [AllowAny]
 
     def create(self, request, *args, **kwargs):
         serializer = PostCreateSerializer(data=request.data)
