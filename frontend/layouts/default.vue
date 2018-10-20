@@ -2,7 +2,6 @@
   <section class="container">
     <div>
     <nuxt/>
-      <Toolbar/>
     </div>
   </section>
 </template>

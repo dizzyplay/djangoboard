@@ -25,8 +25,8 @@ export default {
     PostFrom,
   },
   async asyncData(){
-    let {data} = await axios.get(`http://211.114.88.77/blog/api`)
-    return { listData : data }
+    let {data} = await axios.get('http://211.114.88.77/blog/api/')
+    return {listData:data}
   }
 }
 </script>
