@@ -3,9 +3,7 @@
       <div class="container">
         <PostFrom/>
       </div>
-      <v-btn @click="$store.commit('getData')">get</v-btn>
-      {{$store.state.blogData}}
-      <div v-for="(post, index) in $store.state.blogData" v-bind:key="index">
+      <div v-for="(post, index) in listData" v-bind:key="index">
         <Card
           v-bind:id="post.id"
           v-bind:title="post.title"
@@ -26,8 +24,14 @@ export default {
     Card,
     PostFrom,
   },
-  mounted(){
-    this.$store.commit('getData')
+  computed:{
+    listData(){
+      return this.$store.state.blogData
+    }
+  },
+  created(){
+    this.$store.dispatch('getBlogData')
+    // this.$store.commit('getData')
   },
   // async asyncData(){
   //   let {data} = await axios.get('http://211.114.88.77/blog/api/')
@@ -38,5 +42,4 @@ export default {
 
 <style>
 </style>
-
 

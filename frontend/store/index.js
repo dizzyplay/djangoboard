@@ -8,10 +8,15 @@ const createStore = () => {
       blogData: undefined,
     },
     mutations:{
-      async getData(state) {
-        let {data} = await axios.get('http://211.114.88.77/blog/api')
+      async setBlogData(state) {
+        let {data} = await axios.get(`http://211.114.88.77/blog/api`)
         state.blogData = data
      }
+    },
+    actions:{
+      getBlogData(context){
+        context.commit('setBlogData')
+      }
     }
   })
 }
