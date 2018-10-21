@@ -81,7 +81,8 @@
           this.title = '';
           this.content='';
           this.isLoading = false;
-          window.location.reload(true)
+          this.$store.commit('getData') //vuex를 사용해서 댓글 작성시 페이지 리로딩없이 리스트 렌더링
+          // window.location.reload(true) 댓글작성후 페이지 리로딩
         }
       }
     }
