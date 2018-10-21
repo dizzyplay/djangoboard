@@ -5,7 +5,7 @@ import axios from 'axios'
 const createStore = () => {
   return new Vuex.Store({
     state:{
-      blogData: [],
+      blogData: undefined,
     },
     mutations:{
       async getData(state) {

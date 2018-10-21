@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import axios from 'axios'
+  // import axios from 'axios'
   import Card from '../components/Card'
   import PostFrom from '../components/PostForm'
 
@@ -27,10 +27,10 @@ export default {
   beforeCreate(){
     this.$store.commit('getData')
   },
-  async asyncData(){
-    let {data} = await axios.get('http://211.114.88.77/blog/api/')
-    return {listData:data}
-  }
+  // async asyncData(){
+  //   let {data} = await axios.get('http://211.114.88.77/blog/api/')
+  //   return {listData:data}
+  // }
 }
 </script>
 
