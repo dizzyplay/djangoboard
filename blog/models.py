@@ -16,5 +16,8 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('blog:post_detail', args=[self.pk])
 
+    def short_date(self):
+        return self.created_at.strftime("%y/%m/%d")
+
     class Meta:
         ordering=['-id']

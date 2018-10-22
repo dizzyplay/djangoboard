@@ -8,7 +8,7 @@
           v-bind:id="post.id"
           v-bind:title="post.title"
           v-bind:content="post.content"
-          v-bind:created_at="post.created_at"
+          v-bind:created_at="post.short_date"
         />
       </div>
     </div>

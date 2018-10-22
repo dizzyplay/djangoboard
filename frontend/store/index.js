@@ -17,7 +17,7 @@ const createStore = () => {
       getBlogData(context){
         context.commit('setBlogData')
       }
-    }
+    },
   })
 }
 
