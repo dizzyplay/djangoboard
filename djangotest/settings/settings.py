@@ -57,7 +57,9 @@ ROOT_URLCONF = 'djangotest.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join('djangotest', 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -119,6 +121,9 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'djangotest','static')
+]
 
 CORS_ORIGIN_WHITELIST = (
     '211.114.88.77',

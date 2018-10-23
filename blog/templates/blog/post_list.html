@@ -1,12 +1,30 @@
-<html>
-<head>
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">번호</th>
+                <th scope="col">제목</th>
+                <th scope="col">날짜</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for post in qs %}
+            <tr>
+                <td>{{ post.id}}</td>
+                <td><a href="{% url 'blog:post_detail' post.pk%}" style="text-decoration: none" class="text-dark" > {{ post.title}}</a></td>
+                <td>{{post.short_date}}</td>
+            </tr>
+        {% endfor %}
+            <tr>
+                <td></td><td></td>
+                <td>
+                    <button class="btn btn-sm btn-primary" onclick="window.location.href='{% url 'blog:post_new' %}'">글쓰기</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-</head>
-<body>
-{% for post in qs %}
-    <a href="{% url 'blog:post_detail' post.pk %}"> {{ post.pk }} {{ post.title }}</a><br>
-{% endfor %}
-<br>
-<a href="{% url 'blog:post_new' %}">글쓰기</a>
-</body>
-</html>
+</div>
+{%endblock%}
