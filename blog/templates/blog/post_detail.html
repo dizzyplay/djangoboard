@@ -1,14 +1,12 @@
-<html>
-<head>
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="container">
 
-</head>
-
-<body>
-{{ post.title }}
+        <h1>{{ post.title }}</h1>
 <br>
 <p>
     {{ post.content | linebreaks }}
 </p>
-<a href="{% url "blog:post_list" %}">목록으로</a>
-</body>
-</html>
+        <a href="{% url "blog:post_list" %}"><button class="btn btn-sm btn-primary">목록으로</button></a>
+    </div>
+{% endblock %}

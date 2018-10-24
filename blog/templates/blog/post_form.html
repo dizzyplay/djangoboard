@@ -1,14 +1,13 @@
-<html>
-<head>
+{% extends 'layout.html' %}
 
-</head>
-<body>
-<p>
-    <form method="post" action="">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit">
-</form>
-</p>
-</body>
-</html>
+{% block content %}
+    <div class="container">
+        <form method="post" action="">
+            <div class="form-group">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">작성</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

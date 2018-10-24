@@ -1,10 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
 <div class="container">
-<button class="btn btn-default" id="test" value="44">test</button>
-<p>
-    <span id="content"></span>
-</p>
     <table class="table">
         <thead>
             <tr>
@@ -17,7 +13,7 @@
         {% for post in qs %}
             <tr>
                 <td>{{ post.id}}</td>
-                <td><button value="{{ post.id }}" style="text-decoration: none" class="btn btn-sm btn-block btn-primary btn-light" > {{ post.title}}</button></td>
+                <td><a href="{% url 'blog:post_detail' post.pk %}">{{ post.title}}</a></td>
                 <td>{{post.short_date}}</td>
             </tr>
         {% endfor %}
@@ -32,17 +28,3 @@
     </table>
 </div>
 {%endblock%}
-{% block javascript %}
-    <script>
-        $('td :button').click(function(){
-            console.log($(this).val())
-            $.ajax({
-                url:'./api/'+ $(this).val(),
-                success:function(data){
-                    console.log(data)
-                    $('#content').append(data.content)
-                }
-            })
-        })
-    </script>
-{% endblock %}
