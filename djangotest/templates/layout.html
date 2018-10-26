@@ -22,10 +22,10 @@
                         게시판
                     </a>
                     <div class="dropdown-menu" >
-                        <a class="dropdown-item" href="#">컴퓨터</a>
-                        <a class="dropdown-item" href="#">게임</a>
-                        <a class="dropdown-item" href="#">영화</a>
-                        <a class="dropdown-item" href="#">자동차</a>
+                        <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=컴퓨터">컴퓨터</a>
+                        <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=게임">게임</a>
+                        <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=영화">영화</a>
+                        <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=자동차">자동차</a>
                     </div>
                 </li>
             </ul>

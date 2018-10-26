@@ -1,13 +1,21 @@
 from django.shortcuts import render, redirect
-from .models import Post
+from django.core.exceptions import ObjectDoesNotExist
+from .models import Post, Category
 from .forms import PostForm
 
 # Create your views here.
 
 
 def post_list(request):
-    qs = Post.objects.all()
-
+    category = request.GET.get('category', None)
+    if category:
+        try:
+            category_q = Category.objects.get(title=category)
+            qs = Post.objects.filter(category=category_q)
+        except ObjectDoesNotExist:
+            qs = Post.objects.all()
+    else:
+        qs = Post.objects.all()
     return render(request, 'blog/post_list.html',
                   {
                       "qs": qs
