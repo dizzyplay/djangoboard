@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from .models import Profile
+from django.contrib.auth import logout
 from django.contrib.auth import get_user_model
+from django.shortcuts import redirect
 
+from .models import Profile
 
 User = get_user_model()
 
@@ -12,8 +14,11 @@ def user_profile(request):
     print(user_obj)
     print(user_profile_obj)
     return render(request, 'users/profile.html',{
-        'user': user_obj,
+        'user_obj': user_obj,
         'user_profile': user_profile_obj,
     })
 
 
+def logout_view(request):
+    logout(request)
+    return redirect('blog:post_list')
