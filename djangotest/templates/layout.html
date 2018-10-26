@@ -7,12 +7,28 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
+{% if messages %}
+<div class="container-fluid">
+    {%  for message in messages %}
+        {% if message.tags == 'error' %}
+            <div class="alert alert-warning">
+                {{ message }}
+            </div>
+        {% elif message.tags == 'success' %}
+        <div class="alert alert-success">
+            {{ message }} - {{ request.user }} 님 반갑습니다
+        </div>
+        {% endif %}
+
+    {%  endfor %}
+</div>
+{% endif %}
 <div class="container-fluid" style="height:100px;">
     <nav class="navbar navbar-expand-lg nav-bar-light bg-light">
         <a class="navbar-brand mb-0 h1" href="{% url 'blog:post_list' %}">Board </a>
-            {% if category_title %}
-                {{ category_title }}
-            {% endif %}
+        {% if category_title %}
+            {{ category_title }}
+        {% endif %}
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 {% if user.is_authenticated %}
@@ -24,7 +40,7 @@
                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
                         게시판
                     </a>
-                    <div class="dropdown-menu" >
+                    <div class="dropdown-menu">
                         <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=자유">자유</a>
                         <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=컴퓨터">컴퓨터</a>
                         <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=게임">게임</a>
@@ -35,9 +51,11 @@
             </ul>
             <div class="pull-right">
                 {% if user.is_authenticated %}
-                    <a href="{% url 'users:logout' %}"><button class="btn btn-warning btn-sm" >로그아웃</button></a>
+                    <a href="{% url 'users:logout' %}">
+                        <button class="btn btn-warning btn-sm">로그아웃</button>
+                    </a>
                 {% else %}
-                    <button class="btn btn-primary btn-sm">로그인</button>
+                    <button id="myBtn" class="btn btn-primary btn-sm">로그인</button>
                 {% endif %}
             </div>
         </div>
@@ -56,6 +74,37 @@
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
 
-{% block javascript %}{% endblock %}
+
+{#로그인 모달#}
+<div id="Modal" class="loginModal">
+    <div class="login-modal-content">
+        <h1>로그인</h1>
+        <form method="POST" action="{% url 'users:login' %}">
+            <div class="form-group">
+                {% csrf_token %}
+                <label for="InputId">사용자ID</label>
+                <input type="text" name="username" class="form-control form-control-sm" id="InputId" required>
+                <label for="InputPassword">비밀번호</label>
+                <input type="password" name="password" class="form-control form-control-sm" id="inputPassword" required>
+            </div>
+                <input type="submit" class="btn btn-primary btn-sm btn-block" value="로그인">
+        </form>
+    </div>
+</div>
+<script>
+    let modal = document.getElementById('Modal');
+    let btn = document.getElementById('myBtn');
+
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+{% block javascript %}
+{% endblock %}
 </body>
 </html>
