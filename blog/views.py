@@ -25,6 +25,7 @@ def post_list(request):
 
 def post_detail(request, pk):
     post = Post.objects.get(pk=pk)
+    qs = Post.objects.filter(id=pk)
 
     return render(request, 'blog/post_detail.html', {
         "post": post,
