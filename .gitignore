@@ -6,3 +6,4 @@ user.sh
 static/*
 venv/
 */node_modules/*
+secret.json
