@@ -1,0 +1,139 @@
+{% extends 'consulting/layout.html' %}
+{% block content %}
+  <div class="container-fluid">
+    <div class="row justify-content-md-center">
+      <div class="jumbotron">
+        <h1 class="display-4">브랜딩 의뢰 제안</h1>
+        <p class="lead">브랜딩 제안에 대한 가이드라인입니다.</p>
+        <hr class="my-4">
+        <p>
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+          industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+          and
+          scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+          leap
+          into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with
+          the
+          release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+          publishing
+          software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+      </div>
+      {{ form.non_field_errors }}
+      <form method="post" class="container col-sm-8" id="needs-validation" novalidate>
+        {% csrf_token %}
+        <div class="mb-3">
+          <h5>Customer info</h5>
+        </div>
+        <div class="row">
+          <div class="col-md-3 mb-3">
+            <label class="form-control-label small" for="customer_name">* {{ form.customer_name.label_tag }}</label>
+            {{ form.customer_name }}
+            <small id="customer-name-help" class="form-text text-muted">업체명이나 의뢰자분 성함</small>
+            <div class="small text-danger mt-1">
+            {{ form.customer_name.errors }}
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 mb-3">
+            <label class="form-control-label small" for="customer_phone">* {{ form.customer_phone.label_tag }}</label>
+            {{ form.customer_phone }}
+             <div class="small text-danger mt-1">
+              {{ form.customer_phone.errors }}
+            </div>
+          </div>
+          <div class="col-md-4 offset-md-1 mb-3">
+            <label class="form-control-label small" for="customer-email">* {{ form.customer_email.label_tag }}</label>
+            {{ form.customer_email }}
+            <small id="customer-name-help" class="form-text text-muted">회신받으실 이메일 주소</small>
+            <div class="small text-danger mt-1">
+              {{ form.customer_email.errors }}
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3 mt-3">
+          <h5>Project info</h5>
+          <p>* 프로젝트개요</p>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+            {{ form.project_info }}
+       <div class="small text-danger mt-1">
+              {{ form.project_info.errors }}
+            </div>
+          </div>
+        </div>
+        <div class="mt-5 mb-3">
+          <h5>* 분류</h5>
+        </div>
+        <div class="row">
+          <div class="col-sm-8">
+            {{ form.request_category }}
+          </div>
+        </div>
+        <div class="small text-danger mt-1">
+          {{ form.request_category.errors }}
+        </div>
+
+
+        <!-- 예정일자 -->
+        <div class="row mt-5">
+          <div class="col-sm-3">
+            <label class="form-control-label small" for="customer-request-date"> 착수예정일자</label>
+            {{ form.customer_request_date }}
+          </div>
+          <div class="col-sm-3 offset-md-1">
+            <label class="form-control-label small" for="customer-delivery-date"> 원하는 납품일시</label>
+            {{ form.customer_delivery_date }}
+          </div>
+        </div>
+
+        <!-- 예산 -->
+        <div class="row mt-5">
+          <div class="col-sm-5">
+            <label class="form-control-label small" for="customer-price">예산</label>
+            {{ form.customer_price }}
+          </div>
+        </div>
+
+        <!-- 남기고싶은말-->
+        <div class="row mt-5">
+          <div class="col-sm-8">
+            <label class="form-control-label small" for="customer-memo">남기고싶은 말씀</label>
+            {{ form.customer_memo }}
+          </div>
+        </div>
+
+        <!-- submit -->
+        <div class="row mt-5">
+          <div class="col-sm-8">
+            <input type="submit" value="제출하기" class="btn btn-primary btn-block" id="submit">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  </div>
+{% endblock %}
+{% block javascript %}
+  {#  <script>#}
+  {#      (function () {#}
+  {#          'use strict';#}
+  {#          window.addEventListener('load', function () {#}
+  {#              let form = document.getElementById('needs-validation');#}
+  {#              form.addEventListener('submit', function (e) {#}
+  {##}
+  {##}
+  {#                  if (form.checkValidity() === false) {#}
+  {#                      alert('필수 항목을 모두 입력해주세요')#}
+  {#                      e.preventDefault();#}
+  {#                      e.stopPropagation();#}
+  {#                  }#}
+  {#                  form.classList.add('was-validated');#}
+  {#              }, false)#}
+  {#          }, false)#}
+  {#      })();#}
+  {#  </script>#}
+{% endblock %}
