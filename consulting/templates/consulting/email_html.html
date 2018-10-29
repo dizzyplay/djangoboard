@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    table.email-content {
+      border: 1px solid #444444;
+      border-collapse: collapse;
+    }
+
+    th, td.email-content {
+      border: 1px solid #444444;
+    }
+  </style>
+
+</head>
+<body><br><br>
+<center><h1>{{ user_name }}님! 문의주셔서 감사합니다.</h1>
+  <br><br>
+  <table width="100%" class="email-content"
+         style="border: 1px solid #444444; border-collapse:collapse; margin: 5px; text-align: center;">
+    <tr>
+      <td height="30px" style="border:1px solid #444444;">
+        <b>연락처
+        </b>
+      </td>
+      <td style="border:1px solid #444444;">
+        {{ phone }}
+      </td>
+    </tr>
+    <tr>
+      <td height="30px" style="border:1px solid #444444;">
+        <b>
+          이메일
+        </b>
+      </td>
+      <td height="30px" style="border:1px solid #444444;">
+        {{ email }}
+      </td>
+    </tr>
+    <tr>
+      <td height="30px" style="border:1px solid #444444;">
+        <b>
+          분류
+        </b>
+      </td>
+      <td style="border:1px solid #444444;">{{ request_category }}</td>
+    </tr>
+    <tr>
+      <td height="100" style="border:1px solid #444444;">
+        <b>
+          프로젝트 요청사항
+        </b>
+      </td>
+      <td style="border:1px solid #444444;">
+        {{ subject }}
+      </td>
+    </tr>
+    <tr>
+      <td height="30" style="border:1px solid #444444;">
+        <b>
+          착수예정일자
+        </b>
+      </td>
+      <td style="border:1px solid #444444;">
+        {{ request_date }}
+      </td>
+    </tr>
+    <tr>
+      <td height="30px" style="border:1px solid #444444;">
+        <b>
+          원하는 납품일시
+        </b>
+      </td>
+      <td style="border:1px solid #444444;">
+        {{ delivery_date }}
+      </td>
+    </tr>
+    <tr>
+      <td height="30px" style="border:1px solid #444444;">
+        <b>
+          예산
+        </b>
+      </td>
+      <td style="border:1px solid #444444;">
+        {{ price }} 만원
+      </td>
+    </tr>
+    <tr>
+      <td height="90px" style="border:1px solid #444444;">
+        <b>
+          고객 메모
+        </b>
+      </td>
+      <td style="border:1px solid #444444;">
+        {{ memo }}
+      </td>
+    </tr>
+  </table>
+  <br><br>
+
+  최대한 빠른 시일내에 답변 드리겠습니다. 감사합니다
+</center>
+</body>
+</html>
