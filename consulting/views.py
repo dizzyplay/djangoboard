@@ -11,10 +11,9 @@ def test_view(request):
         form = ProductRequestForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('consulting:main_view')
+            return redirect('consulting:test_view')
     else:
         form = ProductRequestForm()
-
     return render(request, './consulting/test.html',{
         'form': form
     })

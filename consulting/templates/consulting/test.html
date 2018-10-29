@@ -31,7 +31,7 @@
             {{ form.customer_name }}
             <small id="customer-name-help" class="form-text text-muted">업체명이나 의뢰자분 성함</small>
             <div class="small text-danger mt-1">
-            {{ form.customer_name.errors }}
+              {{ form.customer_name.errors }}
             </div>
           </div>
         </div>
@@ -39,7 +39,7 @@
           <div class="col-md-3 mb-3">
             <label class="form-control-label small" for="customer_phone">* {{ form.customer_phone.label_tag }}</label>
             {{ form.customer_phone }}
-             <div class="small text-danger mt-1">
+            <div class="small text-danger mt-1">
               {{ form.customer_phone.errors }}
             </div>
           </div>
@@ -60,7 +60,7 @@
         <div class="row">
           <div class="col-md-8">
             {{ form.project_info }}
-       <div class="small text-danger mt-1">
+            <div class="small text-danger mt-1">
               {{ form.project_info.errors }}
             </div>
           </div>
@@ -68,11 +68,14 @@
         <div class="mt-5 mb-3">
           <h5>* 분류</h5>
         </div>
-        <div class="row">
-          <div class="col-sm-8">
-            {{ form.request_category }}
-          </div>
-        </div>
+          {% for value, text in form.request_category.field.choices %}
+            <div class="ui slider checkbox">
+              <input id="{{ forloop.counter0 }}" name="{{ form.request_category.name }}" type="checkbox"
+                     {% if value in form.request_category.value %} checked="checked"{% endif %}
+                     value="{{ value }}" >
+              <label>{{ text }}</label>
+            </div>
+          {% endfor %}
         <div class="small text-danger mt-1">
           {{ form.request_category.errors }}
         </div>
