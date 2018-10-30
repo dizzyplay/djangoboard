@@ -6,7 +6,7 @@ from background_task import background
 from .models import ProductRequest
 
 
-@background(schedule=10)
+@background(schedule=3)
 def send_product_request_mail(post_pk):
     post = ProductRequest.objects.get(pk=post_pk)
     html_message = loader.render_to_string(
