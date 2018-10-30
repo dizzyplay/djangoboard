@@ -14,7 +14,7 @@ DATABASES = {
 }
 
 # 비밀키관련 json파일 불러오기
-with open(BASE_DIR + "\secret.json", "r") as f:
+with open(BASE_DIR + "/secret.json", "r") as f:
     secrets = json.loads(f.read())
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
