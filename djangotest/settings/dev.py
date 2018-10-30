@@ -3,9 +3,6 @@ import json
 
 DEBUG = True
 
-#비밀키관련 json파일 불러오기
-with open(BASE_DIR+"\secret.json","r") as f:
-    secrets = json.loads(f.read())
 
 
 DATABASES = {
@@ -14,6 +11,14 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, '../../db.sqlite3'),
     }
 }
+
+
+
+
+#비밀키관련 json파일 불러오기
+with open(BASE_DIR+"\secret.json","r") as f:
+    secrets = json.loads(f.read())
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = "smtp.gmail.com"
