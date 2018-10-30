@@ -2,7 +2,7 @@ import os
 from .settings import *
 import json
 
-DEBUG = False
+DEBUG = True
 
 DATABASES = {
     'default': {
