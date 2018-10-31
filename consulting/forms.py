@@ -44,7 +44,7 @@ class ProductRequestForm(forms.ModelForm):
             }),
             'customer_price': forms.NumberInput(attrs={
                 'class': 'form-control form-control-sm',
-                'placeholder' : 'ex)숫자만 입력해주세요 (만원단위)',
+                'placeholder': '숫자만 입력해주세요',
             }),
             'customer_memo': forms.Textarea(attrs={
                 'class': 'form-control form-control-sm',
