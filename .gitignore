@@ -7,3 +7,4 @@ static/*
 venv/
 */node_modules/*
 secret.json
+dev_env.bat
