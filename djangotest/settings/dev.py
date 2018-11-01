@@ -21,12 +21,11 @@ try:
         secrets = json.loads(f.read())
     email_host_user=secrets["EMAIL_HOST_USER"]
     email_host_password=secrets["EMAIL_HOST_PASSWORD"]
-except:
-    pass
+except:#리눅스/맥에서 환경변수로 메일설정 비밀키 가져오기
+    email_host_user=os.environ.get("EMAIL_HOST_USER", "")
+    email_host_password=os.environ.get("EMAIL_USER_PASSWORD", "")
 
-#리눅스/맥에서 환경변수로 메일설정 비밀키 가져오기
-email_host_user=os.environ.get("EMAIL_HOST_USER", "")
-email_host_password=os.environ.get("EMAIL_USER_PASSWORD", "")
+
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
