@@ -40,9 +40,6 @@ def test_view(request):
 
             # send email async
             send_product_request_mail(post.pk)
-            # email = EmailMessage(post.customer_name+'님의 요청입니다', str(content) , to=['dizzyplay@naver.com'])
-            print(post.pk)
-            # email.send()
             return redirect('consulting:test_view')
     else:
         form = ProductRequestForm()
