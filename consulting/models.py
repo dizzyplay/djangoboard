@@ -24,6 +24,7 @@ class ProductRequest(models.Model):
     customer_delivery_date = models.CharField(max_length=300, blank=True, verbose_name='마감날짜')
     customer_price = models.PositiveIntegerField(blank=True, verbose_name='예산', null=True)
     customer_memo = models.TextField(blank=True, verbose_name='메모')
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
 
 
 
