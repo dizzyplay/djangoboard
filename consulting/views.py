@@ -18,7 +18,8 @@ def test_view(request):
             post_dict['get_request_category_display'] = post.get_request_category_display()
             post_dict['short_date'] = post.short_date()
             # send email async
-            send_product_request_mail(post_dict)
+            # 객체의 dict, 작성자에게 보낼지 여부 boolean값
+            send_product_request_mail(post_dict, send_author=True)
 
             return redirect('consulting:test_view')
     else:
