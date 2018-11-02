@@ -16,9 +16,10 @@ def test_view(request):
             post = form.save()
             post_dict = model_to_dict(post)
             post_dict['get_request_category_display'] = post.get_request_category_display()
-
+            post_dict['short_date'] = post.short_date()
             # send email async
             send_product_request_mail(post_dict)
+
             return redirect('consulting:test_view')
     else:
         form = ProductRequestForm()

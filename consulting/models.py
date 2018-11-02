@@ -1,5 +1,4 @@
 from django.db import models
-from django.forms.models import model_to_dict
 from multiselectfield import MultiSelectField
 
 
@@ -26,5 +25,7 @@ class ProductRequest(models.Model):
     customer_memo = models.TextField(blank=True, verbose_name='메모')
     created_at = models.DateTimeField(auto_now_add=True, null=True)
 
+    def short_date(self):
+        return str(self.created_at)[:19]
 
 
