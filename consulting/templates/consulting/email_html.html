@@ -24,7 +24,7 @@
         </b>
       </td>
       <td style="border:1px solid #444444;">
-        {{ phone }}
+        {{ customer_phone }}
       </td>
     </tr>
     <tr>
@@ -34,7 +34,7 @@
         </b>
       </td>
       <td height="30px" style="border:1px solid #444444;">
-        {{ email }}
+        {{ customer_email }}
       </td>
     </tr>
     <tr>
@@ -43,7 +43,7 @@
           분류
         </b>
       </td>
-      <td style="border:1px solid #444444;">{{ request_category }}</td>
+      <td style="border:1px solid #444444;">{{ get_request_category_display }}</td>
     </tr>
     <tr>
       <td height="100" style="border:1px solid #444444;">
@@ -52,7 +52,7 @@
         </b>
       </td>
       <td style="border:1px solid #444444;">
-        {{ subject }}
+        {{ project_inf }}
       </td>
     </tr>
     <tr>
@@ -62,7 +62,7 @@
         </b>
       </td>
       <td style="border:1px solid #444444;">
-        {{ request_date }}
+        {{ customer_request_date }}
       </td>
     </tr>
     <tr>
@@ -72,7 +72,7 @@
         </b>
       </td>
       <td style="border:1px solid #444444;">
-        {{ delivery_date }}
+        {{ customer_delivery_date }}
       </td>
     </tr>
     <tr>
@@ -82,7 +82,7 @@
         </b>
       </td>
       <td style="border:1px solid #444444;">
-        {{ price }} 만원
+        {{ customer_price }} 만원
       </td>
     </tr>
     <tr>
@@ -92,11 +92,13 @@
         </b>
       </td>
       <td style="border:1px solid #444444;">
-        {{ memo }}
+        {{ customer_memo }}
       </td>
     </tr>
   </table>
+
   <br><br>
+  작성날짜 : {{ created_at }}<br><br>
 
   최대한 빠른 시일내에 답변 드리겠습니다. 감사합니다
 </center>
