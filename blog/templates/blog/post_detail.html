@@ -28,8 +28,12 @@
                 onclick="window.location.href=''">삭제
         </button>
       </div>
-
-
     </div>
+  </div>
+  <div class="container">
+    {% for post in qs %}
+      {{ post.title }}<br>
+  {% endfor %}
+
   </div>
 {% endblock %}
