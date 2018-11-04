@@ -15,7 +15,7 @@ def post_list(request):
         try:
             category_q = Category.objects.get(title=category)
             qs = Post.objects.filter(category=category_q)
-            p = CustomPaginator(qs, 3)
+            p = CustomPaginator(qs, 10)
             qs = p.get_page(page)
             page_start, page_end = page_range_check(page, p.num_pages)
         except ObjectDoesNotExist:
@@ -33,7 +33,7 @@ def post_list(request):
 
 
 def post_detail(request, pk):
-    post = get_object_or_404(Post,pk=pk)
+    post = get_object_or_404(Post, pk=pk)
     page = int(request.GET.get('page', 1))
     category = post.category
     if category:
@@ -66,7 +66,7 @@ def post_new(request):
             post = form.save(commit=False)
             post.category = category_q
             post = form.save()
-            return HttpResponseRedirect(reverse('blog:post_detail',kwargs={'pk':post.pk}))
+            return HttpResponseRedirect(reverse('blog:post_detail', kwargs={'pk': post.pk}))
     else:
         form = PostForm()
 
