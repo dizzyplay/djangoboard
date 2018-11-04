@@ -45,7 +45,7 @@ def post_detail(request, pk):
     if category:
         category = Category.objects.get(title=category)
         qs = Post.objects.filter(category=category)
-        p = CustomPaginator(qs, 5)
+        p = CustomPaginator(qs, 10)
         qs = p.get_page(page)
         page_start, page_end = page_range_check(page, p.num_pages)
 
