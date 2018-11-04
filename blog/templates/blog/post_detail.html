@@ -13,14 +13,7 @@
   </div>
   <div class="container">
     <div class="row">
-      <div class="d-flex">
-        <div class="p-2">
-          <button class="btn btn-primary btn-sm"
-                  onclick="window.location.href='{% url 'blog:post_list' %}?category={{ post.category }}'">목록으로
-          </button>
-        </div>
-      </div>
-      <div class="ml-auto p-2">
+      <div class="ml-auto p-2 mb-5 mt-5">
         <button class="btn btn-info btn-sm"
                 onclick="window.location.href=''">수정
         </button>
@@ -31,9 +24,56 @@
     </div>
   </div>
   <div class="container">
-    {% for post in qs %}
-      {{ post.title }}<br>
-  {% endfor %}
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">번호</th>
+        <th scope="col">제목</th>
+        <th scope="col">날짜</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for post in qs %}
+        <tr>
+          <td>{{ post.id }}</td>
+          <td><a href="{% url 'blog:post_detail' post.pk %}?category={{ category_title }}&page={{ qs.number }}">{{ post.title }}</a></td>
+          <td>{{ post.short_date }}</td>
+        </tr>
+      {% endfor %}
+      {% if category_title %}
+        <tr>
+          <td colspan="3">
+            <div class="d-flex flex-row-reverse">
+              <button class="btn btn-sm btn-primary"
+                      onclick="window.location.href='{% url 'blog:post_new' %}?category={{ category_title }}'">
+                글쓰기
+              </button>
+            </div>
+          </td>
+        </tr>
+      {% endif %}
+      </tbody>
+    </table>
 
+      <nav class="d-flex justify-content-center">
+        <ul class="pagination pagination-sm">
+          {% if qs.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?category={{ category_title }}&page={{ qs.previous_page_number }}">이전</a>
+            </li>
+          {% endif %}
+          {% for page_number in prange %}
+            <li class="page-item {% if qs.number == page_number %} active {% endif %} ">
+              <a class="page-link" href="?category={{ category_title }}&page={{ page_number }}"
+              >{{ page_number }}</a>
+            </li>
+          {% endfor %}
+          {% if qs.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?category={{ category_title }}&page={{ qs.next_page_number }}">다음</a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
   </div>
 {% endblock %}

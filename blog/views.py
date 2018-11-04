@@ -1,21 +1,22 @@
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.paginator import Paginator
 from .models import Post, Category
 from .forms import PostForm
 from .context_processors import category_context
+from .paginator import CustomPaginator, page_range_check
 
 
 def post_list(request):
     category = category_context(request)['category_title']
-    page = request.GET.get('page', 1)
+    page = int(request.GET.get('page', 1))
 
     if category:
         try:
             category_q = Category.objects.get(title=category)
             qs = Post.objects.filter(category=category_q)
-            p = Paginator(qs, 1)
+            p = CustomPaginator(qs, 3)
             qs = p.get_page(page)
+            page_start, page_end = page_range_check(page, p.num_pages)
         except ObjectDoesNotExist:
             print('object does not exist!!!')
     else:
@@ -25,26 +26,28 @@ def post_list(request):
                   {
                       "qs": qs,
                       "pages": p,
+                      "prange": p.custom_page_range(int(page_start), int(page_end)),
                       "category_title": category_q,
                   })
 
 
 def post_detail(request, pk):
     post = Post.objects.get(pk=pk)
-    category = category_context(request)['category_title']
+    page = int(request.GET.get('page', 1))
+    category = request.GET.get('category','자유')
     if category:
-        num = int(pk)
-        category= Category.objects.get(title=category)
-        qs_obj = Post.objects.filter(category=category)
-        p = Paginator(qs_obj, 5)
-        qs = p.page(1)
-
-        print(qs.object_list)
+        category = Category.objects.get(title=category)
+        qs = Post.objects.filter(category=category)
+        p = CustomPaginator(qs, 3)
+        qs = p.get_page(page)
+        page_start, page_end = page_range_check(page, p.num_pages)
 
     return render(request, 'blog/post_detail.html', {
         "post": post,
         "category_title": post.category,
-        "qs":qs.object_list,
+        "pages": p,
+        "prange": p.custom_page_range(int(page_start), int(page_end)),
+        "qs": qs,
     })
 
 

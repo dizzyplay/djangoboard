@@ -13,7 +13,7 @@
       {% for post in qs %}
         <tr>
           <td>{{ post.id }}</td>
-          <td><a href="{% url 'blog:post_detail' post.pk %}?category={{ category_title }}">{{ post.title }}</a></td>
+          <td><a href="{% url 'blog:post_detail' post.pk %}?category={{ category_title }}&page={{ qs.number }}">{{ post.title }}</a></td>
           <td>{{ post.short_date }}</td>
         </tr>
       {% endfor %}
@@ -39,7 +39,7 @@
               <a class="page-link" href="?category={{ category_title }}&page={{ qs.previous_page_number }}">이전</a>
             </li>
           {% endif %}
-          {% for page_number in pages.page_range %}
+          {% for page_number in prange %}
             <li class="page-item {% if qs.number == page_number %} active {% endif %} ">
               <a class="page-link" href="?category={{ category_title }}&page={{ page_number }}"
               >{{ page_number }}</a>
