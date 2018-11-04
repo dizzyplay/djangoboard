@@ -1,6 +1,12 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
+from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+
+User = get_user_model()
+
+from users.models import Profile
 from .models import Post, Category
 from .forms import PostForm
 from .context_processors import category_context
@@ -39,7 +45,7 @@ def post_detail(request, pk):
     if category:
         category = Category.objects.get(title=category)
         qs = Post.objects.filter(category=category)
-        p = CustomPaginator(qs, 3)
+        p = CustomPaginator(qs, 5)
         qs = p.get_page(page)
         page_start, page_end = page_range_check(page, p.num_pages)
 
@@ -52,8 +58,10 @@ def post_detail(request, pk):
     })
 
 
+@login_required
 def post_new(request):
     category = category_context(request)['category_title']
+    print(request.user)
     if category:
         try:
             category_q = Category.objects.get(title=category)
@@ -65,6 +73,8 @@ def post_new(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.category = category_q
+            user_obj = User.objects.get(username=request.user)
+            post.profile = user_obj.profile
             post = form.save()
             return HttpResponseRedirect(reverse('blog:post_detail', kwargs={'pk': post.pk}))
     else:
