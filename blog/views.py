@@ -83,3 +83,15 @@ def post_new(request):
     return render(request, 'blog/post_form.html', {
         'form': form,
     })
+
+
+@login_required
+def post_delete(request, pk):
+    if request.method == "POST":
+        user_obj=User.objects.get(username=request.user)
+        if user_obj.username == request.user:
+            post=get_object_or_404(pk=pk)
+            post.delete()
+            redirect('blog:post_list')
+
+    return redirect('blog:post_detail', pk)

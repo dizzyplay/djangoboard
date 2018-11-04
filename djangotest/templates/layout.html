@@ -87,17 +87,20 @@
     </div>
 </div>
 <script>
-    let modal = document.getElementById('Modal');
-    let btn = document.getElementById('myBtn');
-
-    btn.onclick = function () {
-        modal.style.display = "block";
-    }
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
+  window.addEventListener('load',function(){
+      let modal = document.getElementById('Modal');
+      let mybtn = document.getElementById('myBtn');
+      if(mybtn!==null){
+          mybtn.addEventListener('click',function(){
+              modal.style.display = "block";
+          },false)
+      }
+      window.onclick = function (event) {
+          if (event.target == modal) {
+              modal.style.display = "none";
+          }
+      }
+  },false)
 </script>
 {% block javascript %}
 {% endblock %}

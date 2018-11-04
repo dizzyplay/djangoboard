@@ -15,11 +15,9 @@
     <div class="row">
       {% if user.is_authenticated %}
       <div class="ml-auto p-2 mb-5 mt-5">
-        <button class="btn btn-info btn-sm"
-                onclick="window.location.href=''">수정
+        <button class="btn btn-info btn-sm">수정
         </button>
-        <button class="btn btn-warning btn-sm"
-                onclick="window.location.href=''">삭제
+        <button class="btn btn-warning btn-sm" id="post-delete">삭제
         </button>
       </div>
       {% endif %}
@@ -50,7 +48,7 @@
             <div class="d-flex flex-row-reverse">
               {% if user.is_authenticated %}
                 <button class="btn btn-sm btn-primary"
-                        onclick="window.location.href='{% url 'blog:post_new' %}?category={{ category_title }}'">
+                        onclick="window.location.href={% url 'blog:post_new' %}?category={{ category_title }}">
                   글쓰기
                 </button>
               {% endif %}
@@ -82,4 +80,13 @@
       </ul>
     </nav>
   </div>
+{% endblock %}
+{% block javascript %}
+  <script>
+  $(document).ready(function(){
+      $('#post-delete').on('click',function(){
+          console.log('hi')
+      })
+  })
+  </script>
 {% endblock %}
