@@ -45,7 +45,7 @@
       {% if category_title %}
         <tr>
           <td colspan="3">
-            <div class="d-flex flex-row-reverse">
+            <div class="d-flex flex-row-reverse mt-5 mb-1">
               {% if user.is_authenticated %}
                 <button class="btn btn-sm btn-primary"
                         onclick="window.location.href={% url 'blog:post_new' %}?category={{ category_title }}">
