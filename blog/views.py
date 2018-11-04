@@ -89,9 +89,10 @@ def post_new(request):
 def post_delete(request, pk):
     if request.method == "POST":
         user_obj=User.objects.get(username=request.user)
-        if user_obj.username == request.user:
-            post=get_object_or_404(pk=pk)
+        if user_obj == request.user:
+            post= Post.objects.get(pk=pk)
+            print(post)
             post.delete()
-            redirect('blog:post_list')
+            return redirect('blog:post_list')
 
     return redirect('blog:post_detail', pk)

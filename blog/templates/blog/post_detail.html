@@ -86,6 +86,20 @@
   $(document).ready(function(){
       $('#post-delete').on('click',function(){
           console.log('hi')
+          if(confirm('제목 : {{ post.title }} \n정말 위 게시물을 삭제하시겠습니까?\n삭제된 게시물은 복구 할수없습니다.')){
+              console.log('yes')
+              $.ajax({
+                  type:'POST',
+                  url:'/blog/post_delete/{{ post.pk }}/',
+                  data:{
+                      csrfmiddlewaretoken: '{{ csrf_token }}'
+                  },
+                  success: function(){window.location.href="/blog/?category={{ post.category }}&page={{ qs.number }}"}
+              })
+          }
+          else{
+              console.log('no')
+          }
       })
   })
   </script>
