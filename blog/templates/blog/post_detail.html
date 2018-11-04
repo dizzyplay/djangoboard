@@ -13,6 +13,7 @@
   </div>
   <div class="container">
     <div class="row">
+      {% if user.is_authenticated %}
       <div class="ml-auto p-2 mb-5 mt-5">
         <button class="btn btn-info btn-sm"
                 onclick="window.location.href=''">수정
@@ -21,6 +22,7 @@
                 onclick="window.location.href=''">삭제
         </button>
       </div>
+      {% endif %}
     </div>
   </div>
   <div class="container">
@@ -36,7 +38,9 @@
       {% for post in qs %}
         <tr>
           <td>{{ post.id }}</td>
-          <td><a href="{% url 'blog:post_detail' post.pk %}?category={{ category_title }}&page={{ qs.number }}">{{ post.title }}</a></td>
+          <td>
+            <a href="{% url 'blog:post_detail' post.pk %}?category={{ category_title }}&page={{ qs.number }}">{{ post.title }}</a>
+          </td>
           <td>{{ post.short_date }}</td>
         </tr>
       {% endfor %}
@@ -44,10 +48,12 @@
         <tr>
           <td colspan="3">
             <div class="d-flex flex-row-reverse">
-              <button class="btn btn-sm btn-primary"
-                      onclick="window.location.href='{% url 'blog:post_new' %}?category={{ category_title }}'">
-                글쓰기
-              </button>
+              {% if user.is_authenticated %}
+                <button class="btn btn-sm btn-primary"
+                        onclick="window.location.href='{% url 'blog:post_new' %}?category={{ category_title }}'">
+                  글쓰기
+                </button>
+              {% endif %}
             </div>
           </td>
         </tr>
@@ -55,25 +61,25 @@
       </tbody>
     </table>
 
-      <nav class="d-flex justify-content-center">
-        <ul class="pagination pagination-sm">
-          {% if qs.has_previous %}
-            <li class="page-item">
-              <a class="page-link" href="?category={{ category_title }}&page={{ qs.previous_page_number }}">이전</a>
-            </li>
-          {% endif %}
-          {% for page_number in prange %}
-            <li class="page-item {% if qs.number == page_number %} active {% endif %} ">
-              <a class="page-link" href="?category={{ category_title }}&page={{ page_number }}"
-              >{{ page_number }}</a>
-            </li>
-          {% endfor %}
-          {% if qs.has_next %}
-            <li class="page-item">
-              <a class="page-link" href="?category={{ category_title }}&page={{ qs.next_page_number }}">다음</a>
-            </li>
-          {% endif %}
-        </ul>
-      </nav>
+    <nav class="d-flex justify-content-center">
+      <ul class="pagination pagination-sm">
+        {% if qs.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?category={{ category_title }}&page={{ qs.previous_page_number }}">이전</a>
+          </li>
+        {% endif %}
+        {% for page_number in prange %}
+          <li class="page-item {% if qs.number == page_number %} active {% endif %} ">
+            <a class="page-link" href="?category={{ category_title }}&page={{ page_number }}"
+            >{{ page_number }}</a>
+          </li>
+        {% endfor %}
+        {% if qs.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?category={{ category_title }}&page={{ qs.next_page_number }}">다음</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
   </div>
 {% endblock %}
