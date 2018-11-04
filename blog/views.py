@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponseRedirect
 from .models import Post, Category
 from .forms import PostForm
 from .context_processors import category_context
@@ -32,9 +33,9 @@ def post_list(request):
 
 
 def post_detail(request, pk):
-    post = Post.objects.get(pk=pk)
+    post = get_object_or_404(Post,pk=pk)
     page = int(request.GET.get('page', 1))
-    category = request.GET.get('category','자유')
+    category = post.category
     if category:
         category = Category.objects.get(title=category)
         qs = Post.objects.filter(category=category)
@@ -53,7 +54,6 @@ def post_detail(request, pk):
 
 def post_new(request):
     category = category_context(request)['category_title']
-    print(category)
     if category:
         try:
             category_q = Category.objects.get(title=category)
@@ -66,7 +66,7 @@ def post_new(request):
             post = form.save(commit=False)
             post.category = category_q
             post = form.save()
-            return redirect(post)
+            return HttpResponseRedirect(reverse('blog:post_detail',kwargs={'pk':post.pk}))
     else:
         form = PostForm()
 
