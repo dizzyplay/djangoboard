@@ -14,32 +14,36 @@
   <div class="container">
     <div class="row">
       {% if user.is_authenticated %}
-      <div class="ml-auto p-2 mb-5 mt-5">
-        <button class="btn btn-info btn-sm">수정
-        </button>
-        <button class="btn btn-warning btn-sm" id="post-delete">삭제
-        </button>
-      </div>
+        <div class="ml-auto p-2 mb-5 mt-5">
+          <button class="btn btn-info btn-sm">수정
+          </button>
+          <button class="btn btn-warning btn-sm" id="post-delete">삭제
+          </button>
+        </div>
       {% endif %}
     </div>
   </div>
+
+  <!-- 리스트 -->
   <div class="container">
     <table class="table">
       <thead>
       <tr>
-        <th scope="col">번호</th>
-        <th scope="col">제목</th>
-        <th scope="col">날짜</th>
+        <th scope="col" class="small">번호</th>
+        <th scope="col" class="small" style="width:70%">제목</th>
+        <th scope="col" class="small">작성자</th>
+        <th scope="col" class="small">날짜</th>
       </tr>
       </thead>
       <tbody>
       {% for post in qs %}
         <tr>
-          <td>{{ post.id }}</td>
-          <td>
+          <td class="small">{{ post.id }}</td>
+          <td class="small">
             <a href="{% url 'blog:post_detail' post.pk %}?category={{ category_title }}&page={{ qs.number }}">{{ post.title }}</a>
           </td>
-          <td>{{ post.short_date }}</td>
+          <td class="small">{{ post.profile.nickname }}</td>
+          <td class="small">{{ post.short_date }}</td>
         </tr>
       {% endfor %}
       {% if category_title %}
@@ -48,9 +52,9 @@
             <div class="d-flex flex-row-reverse mt-5 mb-1">
               {% if user.is_authenticated %}
                 <a href="{% url 'blog:post_new' %}?category={{ category_title }}">
-                <button class="btn btn-sm btn-primary">
-                  글쓰기
-                </button>
+                  <button class="btn btn-sm btn-primary">
+                    글쓰기
+                  </button>
                 </a>
               {% endif %}
             </div>
@@ -84,24 +88,26 @@
 {% endblock %}
 {% block javascript %}
   <script>
-  $(document).ready(function(){
-      $('#post-delete').on('click',function(){
-          console.log('hi')
-          if(confirm('제목 : {{ post.title }} \n정말 위 게시물을 삭제하시겠습니까?\n삭제된 게시물은 복구 할수없습니다.')){
-              console.log('yes')
-              $.ajax({
-                  type:'POST',
-                  url:'/blog/post_delete/{{ post.pk }}/',
-                  data:{
-                      csrfmiddlewaretoken: '{{ csrf_token }}'
-                  },
-                  success: function(){window.location.href="/blog/?category={{ post.category }}&page={{ qs.number }}"}
-              })
-          }
-          else{
-              console.log('no')
-          }
+      $(document).ready(function () {
+          $('#post-delete').on('click', function () {
+              console.log('hi')
+              if (confirm('제목 : {{ post.title }} \n정말 위 게시물을 삭제하시겠습니까?\n삭제된 게시물은 복구 할수없습니다.')) {
+                  console.log('yes')
+                  $.ajax({
+                      type: 'POST',
+                      url: '/blog/post_delete/{{ post.pk }}/',
+                      data: {
+                          csrfmiddlewaretoken: '{{ csrf_token }}'
+                      },
+                      success: function () {
+                          window.location.href = "/blog/?category={{ post.category }}&page={{ qs.number }}"
+                      }
+                  })
+              }
+              else {
+                  console.log('no')
+              }
+          })
       })
-  })
   </script>
 {% endblock %}
