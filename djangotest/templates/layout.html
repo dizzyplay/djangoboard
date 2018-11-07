@@ -46,7 +46,7 @@
           </div>
         </li>
       </ul>
-      <li class="inline my-2 my-lg-0">
+      <div class="inline my-2 my-lg-0">
           {% if user.is_authenticated %}
             <a href="{% url 'users:user_profile' %}" style="text-decoration: none;">
               <button class="btn btn-default btn-sm">Profile</button>
@@ -57,7 +57,7 @@
           {% else %}
             <button id="myBtn" class="btn btn-primary btn-sm">로그인</button>
           {% endif %}
-        </li>
+        </div>
     </div>
   </nav>
 {% block content %}
