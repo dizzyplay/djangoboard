@@ -39,11 +39,12 @@
         <div class="col-sm-10 mt-5 mb-5">
           <div class="d-flex flex-row-reverse">
             {% if user.is_authenticated %}
-            <button class="btn btn-sm btn-primary"
-                    onclick="window.location.href='{% url 'blog:post_new' %}?category={{ category_title }}'">
-              글쓰기
-            </button>
-              {% endif %}
+              <a href="{% url 'blog:post_new' %}?category={{ category_title }}">
+                <button class="btn btn-sm btn-primary">
+                  글쓰기
+                </button>
+              </a>
+            {% endif %}
           </div>
         </div>
       </div>
