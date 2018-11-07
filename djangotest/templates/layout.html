@@ -1,61 +1,65 @@
 {% load static %}
 <html>
 <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="{% static './style.css' %}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="{% static './style.css' %}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
 {% if messages %}
-<div class="container-fluid">
-    {%  for message in messages %}
-        {% if message.tags == 'error' %}
-            <div class="alert alert-warning">
-                {{ message }}
-            </div>
-        {% elif message.tags == 'success' %}
-        <div class="alert alert-success">
-            {{ message }} - {{ request.user }} 님 반갑습니다
+  <div class="container-fluid">
+    {% for message in messages %}
+      {% if message.tags == 'error' %}
+        <div class="alert alert-warning">
+          {{ message }}
         </div>
-        {% endif %}
-    {%  endfor %}
-</div>
+      {% elif message.tags == 'success' %}
+        <div class="alert alert-success">
+          {{ message }} - {{ request.user }} 님 반갑습니다
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
 {% endif %}
-<div class="container-fluid" style="height:100px;">
-    <nav class="navbar navbar-expand-lg nav-bar-light bg-light">
-        <a class="navbar-brand mb-0 h1" href="{% url 'blog:post_list' %}">Board </a>
-        {% if category_title %}
-          <span class="small">{{ category_title }}</span>
-        {% endif %}
-            <ul class="navbar-nav mr-auto">
-                <li class="navitem dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
-                        게시판
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=자유">자유</a>
-                        <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=컴퓨터">컴퓨터</a>
-                        <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=게임">게임</a>
-                        <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=영화">영화</a>
-                        <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=자동차">자동차</a>
-                    </div>
-                </li>
-            </ul>
-            <div class="pull-right">
-                {% if user.is_authenticated %}
-                    <a href="{% url 'users:user_profile' %}" style="text-decoration: none;">
-                        <button class="btn btn-info btn-sm">Profile</button>
-                    </a>
-                    <a href="{% url 'users:logout' %}">
-                        <button class="btn btn-warning btn-sm">로그아웃</button>
-                    </a>
-                {% else %}
-                    <button id="myBtn" class="btn btn-primary btn-sm">로그인</button>
-                {% endif %}
-            </div>
-    </nav>
-</div>
+  <nav class="navbar navbar-expand-lg nav-bar-light bg-light">
+    <a class="navbar-brand" href="{% url 'blog:post_list' %}">Board </a>
+    {% if category_title %}
+      <span class="badge badge-pill badge-dark">{{ category_title }}</span>
+    {% endif %}
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon">Menu</span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            게시판
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+            <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=자유">자유</a>
+            <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=컴퓨터">컴퓨터</a>
+            <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=게임">게임</a>
+            <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=영화">영화</a>
+            <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=자동차">자동차</a>
+          </div>
+        </li>
+      </ul>
+      <li class="inline my-2 my-lg-0">
+          {% if user.is_authenticated %}
+            <a href="{% url 'users:user_profile' %}" style="text-decoration: none;">
+              <button class="btn btn-default btn-sm">Profile</button>
+            </a>
+            <a href="{% url 'users:logout' %}">
+              <button class="btn btn-warning btn-sm">로그아웃</button>
+            </a>
+          {% else %}
+            <button id="myBtn" class="btn btn-primary btn-sm">로그인</button>
+          {% endif %}
+        </li>
+    </div>
+  </nav>
 {% block content %}
 {% endblock %}
 <script
@@ -72,35 +76,35 @@
 
 {#로그인 모달#}
 <div id="Modal" class="loginModal">
-    <div class="login-modal-content">
-        <h1>로그인</h1>
-        <form method="POST" action="{% url 'users:login' %}">
-            <div class="form-group">
-                {% csrf_token %}
-                <label for="InputId">사용자ID</label>
-                <input type="text" name="username" class="form-control form-control-sm" id="InputId" required>
-                <label for="InputPassword">비밀번호</label>
-                <input type="password" name="password" class="form-control form-control-sm" id="inputPassword" required>
-            </div>
-                <input type="submit" class="btn btn-primary btn-sm btn-block" value="로그인">
-        </form>
-    </div>
+  <div class="login-modal-content">
+    <h1>로그인</h1>
+    <form method="POST" action="{% url 'users:login' %}">
+      <div class="form-group">
+        {% csrf_token %}
+        <label for="InputId">사용자ID</label>
+        <input type="text" name="username" class="form-control form-control-sm" id="InputId" required>
+        <label for="InputPassword">비밀번호</label>
+        <input type="password" name="password" class="form-control form-control-sm" id="inputPassword" required>
+      </div>
+      <input type="submit" class="btn btn-primary btn-sm btn-block" value="로그인">
+    </form>
+  </div>
 </div>
 <script>
-  window.addEventListener('load',function(){
-      let modal = document.getElementById('Modal');
-      let mybtn = document.getElementById('myBtn');
-      if(mybtn!==null){
-          mybtn.addEventListener('click',function(){
-              modal.style.display = "block";
-          },false)
-      }
-      window.onclick = function (event) {
-          if (event.target == modal) {
-              modal.style.display = "none";
-          }
-      }
-  },false)
+    window.addEventListener('load', function () {
+        let modal = document.getElementById('Modal');
+        let mybtn = document.getElementById('myBtn');
+        if (mybtn !== null) {
+            mybtn.addEventListener('click', function () {
+                modal.style.display = "block";
+            }, false)
+        }
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    }, false)
 </script>
 {% block javascript %}
 {% endblock %}
