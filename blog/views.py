@@ -61,7 +61,6 @@ def post_detail(request, pk):
 @login_required
 def post_new(request):
     category = category_context(request)['category_title']
-    print(request.user)
     if category:
         try:
             category_q = Category.objects.get(title=category)
@@ -88,11 +87,26 @@ def post_new(request):
 @login_required
 def post_delete(request, pk):
     if request.method == "POST":
-        user_obj=User.objects.get(username=request.user)
+        user_obj = User.objects.get(username=request.user)
         if user_obj == request.user:
-            post= Post.objects.get(pk=pk)
-            print(post)
+            post = Post.objects.get(pk=pk)
             post.delete()
             return redirect('blog:post_list')
 
     return redirect('blog:post_detail', pk)
+
+
+@login_required
+def post_edit(request, pk):
+    user_obj = get_object_or_404(User, pk=request.user.id)
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        if user_obj == request.user:
+            form = PostForm(request.POST, instance=post)
+            if form.is_valid():
+                post = form.save()
+                return redirect(post)
+    form = PostForm(instance=post)
+    return render(request, 'blog/post_form.html', {
+        'form': form
+    })

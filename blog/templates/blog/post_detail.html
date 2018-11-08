@@ -15,8 +15,10 @@
     <div class="row">
       {% if user.is_authenticated %}
         <div class="ml-auto p-2 mb-5 mt-5">
+        <a href="{% url 'blog:post_edit' post.pk %}">
           <button class="btn btn-info btn-sm">수정
           </button>
+        </a>
           <button class="btn btn-warning btn-sm" id="post-delete">삭제
           </button>
         </div>
