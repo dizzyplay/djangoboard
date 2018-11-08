@@ -77,7 +77,7 @@
 
 
 {#로그인 모달#}
-<div id="loginView" class="hiddenModal">
+<div id="loginView" class="hiddenModal" style="display: none">
   <div class="login-modal-content">
     <h1>로그인</h1>
     <form method="POST" action="{% url 'users:login' %}">
@@ -99,7 +99,7 @@
 {#password1#}
 {#password2#}
 
-<div id="joinView" class="hiddenModal">
+<div id="joinView" class="hiddenModal" style="display: none;">
   <div class="login-modal-content">
     <h1>회원가입</h1>
     <form method="POST" action="#">
@@ -128,16 +128,15 @@
         let joinView = document.getElementById('joinView');
         let myJoinBtn = document.getElementById('myJoinBtn');
 
-        if(myJoinBtn !== null){
-        myJoinBtn.addEventListener('click', function () {
-            joinView.style.display = "block";
-        })
-        }
-        if(myLoginBtn !== null){
         myLoginBtn.addEventListener('click', function () {
             loginView.style.display = "block";
         }, false)
-        }
+
+        myJoinBtn.addEventListener('click', function () {
+            joinView.style.display = "block";
+        })
+
+
         window.onclick = function (event) {
             if (event.target == loginView || event.target == joinView) {
                 loginView.style.display = "none";
