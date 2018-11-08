@@ -50,7 +50,7 @@
       {% endfor %}
       {% if category_title %}
         <tr>
-          <td colspan="3">
+          <td colspan="4">
             <div class="d-flex flex-row-reverse mt-5 mb-1">
               {% if user.is_authenticated %}
                 <a href="{% url 'blog:post_new' %}?category={{ category_title }}">
