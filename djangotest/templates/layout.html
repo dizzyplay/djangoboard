@@ -128,12 +128,16 @@
         let joinView = document.getElementById('joinView');
         let myJoinBtn = document.getElementById('myJoinBtn');
 
+        if(myJoinBtn !== null){
         myJoinBtn.addEventListener('click', function () {
             joinView.style.display = "block";
         })
+        }
+        if(myLoginBtn !== null){
         myLoginBtn.addEventListener('click', function () {
             loginView.style.display = "block";
         }, false)
+        }
         window.onclick = function (event) {
             if (event.target == loginView || event.target == joinView) {
                 loginView.style.display = "none";
