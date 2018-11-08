@@ -55,7 +55,8 @@
               <button class="btn btn-warning btn-sm">로그아웃</button>
             </a>
           {% else %}
-            <button id="myBtn" class="btn btn-primary btn-sm">로그인</button>
+            <button id="myLoginBtn" class="btn btn-default btn-sm">로그인</button>
+            <button id="myBtn" class="btn btn-primary btn-sm">회원가입</button>
           {% endif %}
         </div>
     </div>
@@ -93,9 +94,9 @@
 <script>
     window.addEventListener('load', function () {
         let modal = document.getElementById('Modal');
-        let mybtn = document.getElementById('myBtn');
-        if (mybtn !== null) {
-            mybtn.addEventListener('click', function () {
+        let myLoginbtn = document.getElementById('myLoginBtn');
+        if (myLoginbtn !== null) {
+            myLoginbtn.addEventListener('click', function () {
                 modal.style.display = "block";
             }, false)
         }
