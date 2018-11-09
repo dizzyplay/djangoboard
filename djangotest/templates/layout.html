@@ -102,7 +102,7 @@
 <div id="joinView" class="hiddenModal" style="display: none;">
   <div class="login-modal-content">
     <h1>회원가입</h1>
-    <form method="POST" action="#">
+    <form method="POST" action="#" id="joinForm">
       <div class="form-group">
         <label for="joinEmail">Email <span class="badge badge-dark">인증메일이 발송됩니다</span></label>
         <input type="text" name="email" class="form-control form-control-sm" id="joinEmail" required>
@@ -143,6 +143,22 @@
                 joinView.style.display = "none";
             }
         }
+
+        {#password 검사#}
+        let password1 = document.getElementById('Password1')
+        let password2 = document.getElementById('Password2')
+        let joinForm = document.getElementById('joinForm')
+
+        joinForm.addEventListener('submit',function(e){
+            e.preventDefault()
+            console.log(password1.value)
+            if(password1.value !== password2.value){
+                alert("비밀번호가 서로 다릅니다")
+            }
+            else{
+                console.log('비밀 번호가 같습니다!')
+            }
+        })
     }, false)
 </script>
 {% block javascript %}
