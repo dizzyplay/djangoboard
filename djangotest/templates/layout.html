@@ -128,11 +128,9 @@
         let joinView = document.getElementById('joinView');
         let myJoinBtn = document.getElementById('myJoinBtn');
 
-        if(!myLoginBtn){
-            myLoginBtn.addEventListener('click', function () {
-                loginView.style.display = "block";
-            }, false)
-        }
+        myLoginBtn.addEventListener('click', function () {
+            loginView.style.display = "block";
+        })
 
         myJoinBtn.addEventListener('click', function () {
             joinView.style.display = "block";
@@ -178,9 +176,9 @@
                     diffPass.style.display = 'none';
                     submitCheck = true;
                 }
-            }else{
+            } else {
                 submitCheck = false;
-                if (password1.value !== password2.value.slice(0,-1)){
+                if (password1.value !== password2.value.slice(0, -1)) {
 
                     diffPass.style.display = 'block';
                 }
