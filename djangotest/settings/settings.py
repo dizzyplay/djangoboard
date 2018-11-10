@@ -37,12 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'multiselectfield',
-    'blog',
     'rest_framework',
     'corsheaders',
+    'background_task',
+    'blog',
     'users',
     'consulting',
-    'background_task',
+    'scenery',
 ]
 
 MIDDLEWARE = [
