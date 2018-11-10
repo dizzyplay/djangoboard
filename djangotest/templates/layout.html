@@ -112,7 +112,7 @@
         <input type="text" name="nickname" class="form-control form-control-sm" id="joinNickname" required>
         <label for="Password1">비밀번호</label>
         <input type="password" name="password1" class="form-control form-control-sm" id="Password1" required>
-        <label for="Password2">비밀번호 확인</label>
+        <label for="Password2">비밀번호 확인</label> <span class="small text-danger" style="display: none;" id="diffPass">비밀번호가 다릅니다!!</span>
         <input type="password" name="password2" class="form-control form-control-sm" id="Password2" required>
       </div>
       <input type="submit" class="btn btn-primary btn-sm btn-block" value="회원가입">
@@ -148,15 +148,44 @@
         let password1 = document.getElementById('Password1')
         let password2 = document.getElementById('Password2')
         let joinForm = document.getElementById('joinForm')
+        let submitCheck = false;
 
-        joinForm.addEventListener('submit',function(e){
+        joinForm.addEventListener('submit', function (e) {
             e.preventDefault()
-            console.log(password1.value)
-            if(password1.value !== password2.value){
-                alert("비밀번호가 서로 다릅니다")
+            if (submitCheck) {
+                console.log('info sending')
             }
-            else{
-                console.log('비밀 번호가 같습니다!')
+            else {
+                alert('입력사항을 확인해 주세요')
+                return false;
+            }
+        })
+
+        {#패스워드 확인#}
+        let diffPass = document.getElementById('diffPass')
+
+        password2.addEventListener('keydown', function (e) {
+            let temp = '';
+            if (e.key !== "Backspace" && e.key !== 'Delete') {
+                submitCheck = false;
+                temp = password2.value + e.key;
+                if (password1.value !== temp) {
+                    diffPass.style.display = 'block';
+                }
+                else {
+                    diffPass.style.display = 'none';
+                    submitCheck = true;
+                }
+            }else{
+                submitCheck = false;
+                if (password1.value !== password2.value.slice(0,-1)){
+
+                    diffPass.style.display = 'block';
+                }
+                else {
+                    diffPass.style.display = 'none';
+                    submitCheck = true;
+                }
             }
         })
     }, false)
