@@ -128,9 +128,11 @@
         let joinView = document.getElementById('joinView');
         let myJoinBtn = document.getElementById('myJoinBtn');
 
-        myLoginBtn.addEventListener('click', function () {
-            loginView.style.display = "block";
-        })
+        if(myLoginBtn){
+            myLoginBtn.addEventListener('click', function () {
+                loginView.style.display = "block";
+            })
+        }
 
         myJoinBtn.addEventListener('click', function () {
             joinView.style.display = "block";
