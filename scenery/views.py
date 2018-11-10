@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 
 
 def main_view(request):
-    period = int(request.GET.get('period', '60'))
+    period = int(request.GET.get('period', '10'))
     request_time = request.GET.get('time',None)
     if request_time is not None:
         request_time = str(request_time)
