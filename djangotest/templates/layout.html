@@ -128,15 +128,17 @@
         let joinView = document.getElementById('joinView');
         let myJoinBtn = document.getElementById('myJoinBtn');
 
+        {#콘솔창 에러 때문에 if 문 넣음 #}
         if(myLoginBtn){
             myLoginBtn.addEventListener('click', function () {
                 loginView.style.display = "block";
             })
         }
-
-        myJoinBtn.addEventListener('click', function () {
-            joinView.style.display = "block";
-        })
+        if(myJoinBtn){
+            myJoinBtn.addEventListener('click', function () {
+                joinView.style.display = "block";
+            })
+        }
 
 
         window.onclick = function (event) {
