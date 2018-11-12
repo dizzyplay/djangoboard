@@ -1,66 +1,66 @@
 {% load static %}
 <html>
 <head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="{% static './style.css' %}">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static './style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
 {% if messages %}
-  <div class="container-fluid">
-    {% for message in messages %}
-      {% if message.tags == 'error' %}
-        <div class="alert alert-warning">
-          {{ message }}
-        </div>
-      {% elif message.tags == 'success' %}
-        <div class="alert alert-success">
-          {{ message }} - {{ request.user }} 님 반갑습니다
-        </div>
-      {% endif %}
-    {% endfor %}
-  </div>
+    <div class="container-fluid">
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+                <div class="alert alert-warning">
+                    {{ message }}
+                </div>
+            {% elif message.tags == 'success' %}
+                <div class="alert alert-success">
+                    {{ message }} - {{ request.user }} 님 반갑습니다
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
 {% endif %}
 <nav class="navbar navbar-expand-lg nav-bar-light bg-light">
-  <a class="navbar-brand" href="{% url 'blog:post_list' %}">Board </a>
-  {% if category_title %}
-    <span class="badge badge-pill badge-default">{{ category_title }}</span>
-  {% endif %}
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon">Menu</span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true"
-           aria-expanded="false">
-          <span class="badge badge-pill badge-warning">게시판</span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=자유">자유</a>
-          <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=컴퓨터">컴퓨터</a>
-          <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=게임">게임</a>
-          <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=영화">영화</a>
-          <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=자동차">자동차</a>
+    <a class="navbar-brand" href="{% url 'blog:post_list' %}">Board </a>
+    {% if category_title %}
+        <span class="badge badge-pill badge-default">{{ category_title }}</span>
+    {% endif %}
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon">Menu</span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true"
+                   aria-expanded="false">
+                    <span class="badge badge-pill badge-warning">게시판</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=자유">자유</a>
+                    <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=컴퓨터">컴퓨터</a>
+                    <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=게임">게임</a>
+                    <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=영화">영화</a>
+                    <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=자동차">자동차</a>
+                </div>
+            </li>
+        </ul>
+        <div class="inline my-2 my-lg-0">
+            {% if user.is_authenticated %}
+                <a href="{% url 'users:user_profile' %}" style="text-decoration: none;">
+                    <button class="btn btn-default btn-sm">Profile</button>
+                </a>
+                <a href="{% url 'users:logout' %}">
+                    <button class="btn btn-warning btn-sm">로그아웃</button>
+                </a>
+            {% else %}
+                <button id="myLoginBtn" class="btn btn-default btn-sm">로그인</button>
+                <button id="myJoinBtn" class="btn btn-primary btn-sm">회원가입</button>
+            {% endif %}
         </div>
-      </li>
-    </ul>
-    <div class="inline my-2 my-lg-0">
-      {% if user.is_authenticated %}
-        <a href="{% url 'users:user_profile' %}" style="text-decoration: none;">
-          <button class="btn btn-default btn-sm">Profile</button>
-        </a>
-        <a href="{% url 'users:logout' %}">
-          <button class="btn btn-warning btn-sm">로그아웃</button>
-        </a>
-      {% else %}
-        <button id="myLoginBtn" class="btn btn-default btn-sm">로그인</button>
-        <button id="myJoinBtn" class="btn btn-primary btn-sm">회원가입</button>
-      {% endif %}
     </div>
-  </div>
 </nav>
 {% block content %}
 {% endblock %}
@@ -78,46 +78,49 @@
 
 {#로그인 모달#}
 <div id="loginView" class="hiddenModal" style="display: none">
-  <div class="login-modal-content">
-    <h1>로그인</h1>
-    <form method="POST" action="{% url 'users:login' %}">
-      <div class="form-group">
-        {% csrf_token %}
-        <label for="InputId">사용자ID</label>
-        <input type="text" name="username" class="form-control form-control-sm" id="InputId" required>
-        <label for="InputPassword">비밀번호</label>
-        <input type="password" name="password" class="form-control form-control-sm" id="inputPassword" required>
-      </div>
-      <input type="submit" class="btn btn-primary btn-sm btn-block" value="로그인">
-    </form>
-  </div>
+    <div class="login-modal-content">
+        <h1>로그인</h1>
+        <form method="POST" action="{% url 'users:login' %}">
+            <div class="form-group">
+                {% csrf_token %}
+                <label for="InputId">사용자ID</label>
+                <input type="text" name="username" class="form-control form-control-sm" id="InputId" required>
+                <label for="InputPassword">비밀번호</label>
+                <input type="password" name="password" class="form-control form-control-sm" id="inputPassword" required>
+            </div>
+            <input type="submit" class="btn btn-primary btn-sm btn-block" value="로그인">
+        </form>
+    </div>
 </div>
 
 {#회원가입 모달#}
+{#joinEmail#}
 {#joinId#}
 {#joinNickname#}
 {#password1#}
 {#password2#}
 
 <div id="joinView" class="hiddenModal" style="display: none;">
-  <div class="login-modal-content">
-    <h1>회원가입</h1>
-    <form method="POST" action="#" id="joinForm">
-      <div class="form-group">
-        <label for="joinEmail">Email <span class="badge badge-dark">인증메일이 발송됩니다</span></label>
-        <input type="text" name="email" class="form-control form-control-sm" id="joinEmail" required>
-        <label for="joinId">사용자ID</label>
-        <input type="text" name="username" class="form-control form-control-sm" id="joinId" required>
-        <label for="joinNickname">닉네임</label>
-        <input type="text" name="nickname" class="form-control form-control-sm" id="joinNickname" required>
-        <label for="Password1">비밀번호</label>
-        <input type="password" name="password1" class="form-control form-control-sm" id="Password1" required>
-        <label for="Password2">비밀번호 확인</label> <span class="small text-danger" style="display: none;" id="diffPass">비밀번호가 다릅니다!!</span>
-        <input type="password" name="password2" class="form-control form-control-sm" id="Password2" required>
-      </div>
-      <input type="submit" class="btn btn-primary btn-sm btn-block" value="회원가입">
-    </form>
-  </div>
+    <div class="login-modal-content">
+        <h1>회원가입</h1>
+        <form method="POST" action="{% url 'users:sign_up' %}#" id="joinForm">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="joinEmail">Email <span class="badge badge-dark">인증메일이 발송됩니다</span></label>
+                <input type="text" name="email" class="form-control form-control-sm" id="joinEmail" required>
+                <label for="joinId">사용자ID</label>
+                <input type="text" name="username" class="form-control form-control-sm" id="joinId" required>
+                <label for="joinNickname">닉네임</label>
+                <input type="text" name="nickname" class="form-control form-control-sm" id="joinNickname" required>
+                <label for="Password1">비밀번호</label>
+                <input type="password" name="password1" class="form-control form-control-sm" id="password1" required>
+                <label for="Password2">비밀번호 확인</label> <span class="small text-danger" style="display: none;"
+                                                             id="diffPass">비밀번호가 다릅니다!!</span>
+                <input type="password" name="password2" class="form-control form-control-sm" id="password2" required>
+            </div>
+            <input type="submit" class="btn btn-primary btn-sm btn-block" value="회원가입">
+        </form>
+    </div>
 </div>
 
 <script>
@@ -129,12 +132,12 @@
         let myJoinBtn = document.getElementById('myJoinBtn');
 
         {#콘솔창 에러 때문에 if 문 넣음 #}
-        if(myLoginBtn){
+        if (myLoginBtn) {
             myLoginBtn.addEventListener('click', function () {
                 loginView.style.display = "block";
             })
         }
-        if(myJoinBtn){
+        if (myJoinBtn) {
             myJoinBtn.addEventListener('click', function () {
                 joinView.style.display = "block";
             })
@@ -149,8 +152,8 @@
         }
 
         {#password 검사#}
-        let password1 = document.getElementById('Password1')
-        let password2 = document.getElementById('Password2')
+        let password1 = document.getElementById('password1')
+        let password2 = document.getElementById('password2')
         let joinForm = document.getElementById('joinForm')
         let submitCheck = false;
 
@@ -158,6 +161,7 @@
             e.preventDefault()
             if (submitCheck) {
                 console.log('info sending')
+                joinForm.submit()
             }
             else {
                 alert('입력사항을 확인해 주세요')
