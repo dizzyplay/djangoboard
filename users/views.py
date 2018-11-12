@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth import logout, login, authenticate, get_user_model
 from django.contrib import messages
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 
 from .models import Profile
 
@@ -19,6 +20,7 @@ def user_profile(request):
     })
 
 
+@login_required
 def logout_view(request):
     logout(request)
     return redirect('blog:post_list')
