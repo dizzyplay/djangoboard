@@ -3,9 +3,9 @@
 
 </head>
 <body>
-{% for list in test %}
+{% for list in image_list %}
   <p>
-    <img src="http://211.114.88.77/static/camera/{{ list }}.jpg" width="800"><br>
+    <img src="./static/camera/{{ list }}.jpg" width="800"><br>
     {{ list }}
   </p>
 {% endfor %}
