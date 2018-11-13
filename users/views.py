@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
+from django.db import IntegrityError
 
 from .models import Profile
 
@@ -16,34 +17,30 @@ def sign_up(request):
         id = request.POST.get('username', None)
         nickname = request.POST.get('nickname', None)
         password = request.POST.get('password2', None)
-        user_obj = User.objects.filter(username=id)
 
-        if len(user_obj) < 1:
-            profile = Profile.objects.filter(email=email, nickname=nickname)
-            if len(profile) < 1:
-                # 회원가입처리
+        check_email = Profile.objects.filter(email=email)
+        check_nickname = Profile.objects.filter(nickname=nickname)
+
+        if len(check_email) == 0 and len(check_nickname) == 0:
+            try:
                 password = make_password(password)
                 user = User.objects.create(username=id, password=password)
-                Profile.objects.create(user=user, email=email, nickname=nickname)
-                return redirect('blog:post_list')
-            else:
-                return redirect('blog:post_list')
-                # 에러처리
+                profile = Profile.objects.create(user=user, nickname=nickname, email=email)
 
-            print(profile)
-            if len(profile) > 0:
-                print('email and nickname error')
-
-                return redirect('blog:post_list')
+            except IntegrityError:
+                return render(request, 'users/reject_your_info.html', {
+                    'reject': 'ID가 이미 존재합니다.'
+                })
         else:
-            print('user exists')
-            return redirect('blog:post_list')
+            return render(request, 'users/reject_your_info.html', {
+                'reject': 'email 또는 닉네임이 존재합니다.'
+            })
+
+        return render(request, 'users/confirm_your_info.html', {
+            'info': profile
+        })
 
     return render('blog:post_list')
-
-
-
-
 
 
 def user_profile(request):
