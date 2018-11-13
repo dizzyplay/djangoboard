@@ -16,7 +16,7 @@ def email_checker(request):
     user_id = request.GET.get('user_id', None)
     user = User.objects.get(id=user_id)
     print(user.profile.email)
-    if check_password(user.profile.email, get_hash):
+    if check_password(user.profile.email, user.profile.hash):
         profile = Profile.objects.get(user=user.id)
         profile.status=True
         profile.save()
@@ -39,9 +39,9 @@ def sign_up(request):
         if len(check_email) == 0 and len(check_nickname) == 0:
             try:
                 password = make_password(password)
+                hash = make_password(email)
                 user = User.objects.create(username=id, password=password)
-                profile = Profile.objects.create(user=user, nickname=nickname, email=email)
-                hashed_value = make_password(profile.email)
+                profile = Profile.objects.create(user=user, nickname=nickname, email=email, hash=hash)
             except IntegrityError:
                 return render(request, 'users/reject_your_info.html', {
                     'reject': 'ID가 이미 존재합니다.'
@@ -53,7 +53,6 @@ def sign_up(request):
         print(profile.email)
         return render(request, 'users/confirm_your_info.html', {
             'info': profile,
-            'hashed_value': hashed_value,
             'user': user,
         })
 
