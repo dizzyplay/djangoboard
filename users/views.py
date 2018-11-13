@@ -54,7 +54,7 @@ def sign_up(request):
         return render(request, 'users/confirm_your_info.html', {
             'info': profile,
             'hashed_value': hashed_value,
-            'user_id': user.id,
+            'user': user,
         })
 
     return render('blog:post_list')
