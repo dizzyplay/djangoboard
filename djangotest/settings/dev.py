@@ -14,8 +14,6 @@ DATABASES = {
 }
 
 
-
-
 #메일 설정 비밀키 윈도우에서  json파일 가져오기
 try:
     with open(BASE_DIR+"\secret.json","r") as f:
@@ -25,8 +23,6 @@ try:
 except:#리눅스/맥에서 환경변수로 메일설정 비밀키 가져오기
     email_host_user=os.environ.get("EMAIL_HOST_USER", "")
     email_host_password=os.environ.get("EMAIL_USER_PASSWORD", "")
-
-
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
