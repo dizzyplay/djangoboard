@@ -113,9 +113,10 @@
                 <label for="joinNickname">닉네임</label>
                 <input type="text" name="nickname" class="form-control form-control-sm" id="joinNickname" required>
                 <label for="Password1">비밀번호</label>
+                <span class="small text-danger" style="display: none;" id="shortPass">비밀번호가 너무 짧습니다 (최소 8자)</span>
                 <input type="password" name="password1" class="form-control form-control-sm" id="password1" required>
-                <label for="Password2">비밀번호 확인</label> <span class="small text-danger" style="display: none;"
-                                                             id="diffPass">비밀번호가 다릅니다!!</span>
+                <label for="Password2">비밀번호 확인</label>
+                <span class="small text-danger" style="display: none;" id="diffPass">비밀번호가 다릅니다!!</span>
                 <input type="password" name="password2" class="form-control form-control-sm" id="password2" required>
             </div>
             <input type="submit" class="btn btn-primary btn-sm btn-block" value="회원가입">
@@ -155,48 +156,40 @@
         let password1 = document.getElementById('password1')
         let password2 = document.getElementById('password2')
         let joinForm = document.getElementById('joinForm')
+
         let submitCheck = false;
 
         joinForm.addEventListener('submit', function (e) {
             e.preventDefault()
             if (submitCheck) {
-                console.log('info sending')
                 joinForm.submit()
             }
             else {
                 alert('입력사항을 확인해 주세요')
-                return false;
             }
         })
 
         {#패스워드 확인#}
         let diffPass = document.getElementById('diffPass')
+        let shortPass = document.getElementById('shortPass')
 
-        password2.addEventListener('keydown', function (e) {
-            let temp = '';
-            if (e.key !== "Backspace" && e.key !== 'Delete') {
-                submitCheck = false;
-                temp = password2.value + e.key;
-                if (password1.value !== temp) {
-                    diffPass.style.display = 'block';
-                }
-                else {
-                    diffPass.style.display = 'none';
-                    submitCheck = true;
-                }
+        password1.addEventListener('keyup', function (e) {
+            if (password1.value.length < 8) {
+                shortPass.style.display = 'block'
             } else {
-                submitCheck = false;
-                if (password1.value !== password2.value.slice(0, -1)) {
-
-                    diffPass.style.display = 'block';
-                }
-                else {
-                    diffPass.style.display = 'none';
-                    submitCheck = true;
-                }
+                shortPass.style.display = 'none'
             }
         })
-    }, false)
+        password2.addEventListener('keyup', function (e) {
+            if (password1.value === password2.value) {
+                submitCheck = true
+                diffPass.style.display = 'none'
+            } else {
+                submitCheck = false
+                diffPass.style.display = 'block'
+            }
+        })
+    })
 </script>
 {% block javascript %}
 {% endblock %}
