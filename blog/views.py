@@ -4,13 +4,12 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 
-User = get_user_model()
-
-from users.models import Profile
 from .models import Post, Category
 from .forms import PostForm
 from .context_processors import category_context
 from .paginator import CustomPaginator, page_range_check
+
+User = get_user_model()
 
 
 def post_list(request):

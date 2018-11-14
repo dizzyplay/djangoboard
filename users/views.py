@@ -8,6 +8,9 @@ from django.db import IntegrityError
 
 from .models import Profile
 
+
+
+
 User = get_user_model()
 
 
@@ -42,10 +45,8 @@ def sign_up(request):
         if len(check_email) + len(check_nickname) == 0:
             try:
                 password = make_password(password)
-                hash_value = make_password(email)
                 user = User.objects.create(username=id, password=password)
-                profile = Profile.objects.create(user=user, nickname=nickname, email=email, hash=hash_value,
-                                                 status=False)
+                profile = Profile.objects.create(user=user, nickname=nickname, email=email, status=False)
             except IntegrityError:
                 return render(request, 'users/reject_your_info.html', {
                     'reject': 'ID가 이미 존재합니다.'

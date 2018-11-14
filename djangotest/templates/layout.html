@@ -64,10 +64,7 @@
 </nav>
 {% block content %}
 {% endblock %}
-<script
-        src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
+<script src="{% static './jquery-3.3.1.min.js' %}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
@@ -84,7 +81,7 @@
             <div class="form-group">
                 {% csrf_token %}
                 <label for="InputId">사용자ID</label>
-                <input type="text" name="username" class="form-control form-control-sm" id="InputId" required>
+                <input type="text" name="username" class="form-control form-control-sm" id="inputId" required>
                 <label for="InputPassword">비밀번호</label>
                 <input type="password" name="password" class="form-control form-control-sm" id="inputPassword" required>
             </div>
@@ -136,11 +133,13 @@
         if (myLoginBtn) {
             myLoginBtn.addEventListener('click', function () {
                 loginView.style.display = "block";
+                document.getElementById('inputId').focus();
             })
         }
         if (myJoinBtn) {
             myJoinBtn.addEventListener('click', function () {
                 joinView.style.display = "block";
+                document.getElementById('joinEmail').focus();
             })
         }
 
