@@ -15,15 +15,18 @@ def email_checker(request):
     get_hash = request.GET.get('hash', None)
     user_id = request.GET.get('user_id', None)
     user = User.objects.get(id=user_id)
-    print(user.profile.email)
-    if check_password(user.profile.email, user.profile.hash):
-        profile = Profile.objects.get(user=user.id)
-        profile.status=True
-        profile.save()
-        print('valid!!')
+
+    if user.profile.status is not True:
+        if check_password(user.profile.email, get_hash):
+            profile = Profile.objects.get(user=user.id)
+            profile.status = True
+            profile.save()
+            valid_message = '이메일 인증이 완료되어 계정이 활성화 되었습니다.'
     else:
-        print('error')
-    return render(request, 'users/email_checker.html')
+        valid_message = '잘못된 접근입니다.'
+    return render(request, 'users/email_checker.html', {
+        'valid_message': valid_message,
+    })
 
 
 def sign_up(request):
@@ -41,7 +44,8 @@ def sign_up(request):
                 password = make_password(password)
                 hash_value = make_password(email)
                 user = User.objects.create(username=id, password=password)
-                profile = Profile.objects.create(user=user, nickname=nickname, email=email, hash=hash_value, status=False)
+                profile = Profile.objects.create(user=user, nickname=nickname, email=email, hash=hash_value,
+                                                 status=False)
             except IntegrityError:
                 return render(request, 'users/reject_your_info.html', {
                     'reject': 'ID가 이미 존재합니다.'
@@ -54,8 +58,8 @@ def sign_up(request):
         return render(request, 'users/confirm_your_info.html', {
             'info': profile,
             'user': user,
+            'hashed_value': make_password(profile.email),
         })
-
     return render('blog:post_list')
 
 
