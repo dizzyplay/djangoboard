@@ -36,12 +36,12 @@ def sign_up(request):
         check_email = Profile.objects.filter(email=email)
         check_nickname = Profile.objects.filter(nickname=nickname)
 
-        if len(check_email) == 0 and len(check_nickname) == 0:
+        if len(check_email) + len(check_nickname) == 0:
             try:
                 password = make_password(password)
-                hash = make_password(email)
+                hash_value = make_password(email)
                 user = User.objects.create(username=id, password=password)
-                profile = Profile.objects.create(user=user, nickname=nickname, email=email, hash=hash)
+                profile = Profile.objects.create(user=user, nickname=nickname, email=email, hash=hash_value, status=False)
             except IntegrityError:
                 return render(request, 'users/reject_your_info.html', {
                     'reject': 'ID가 이미 존재합니다.'

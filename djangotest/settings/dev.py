@@ -3,15 +3,22 @@ import json
 
 DEBUG = True
 
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'test_db',
-        'USER': 'postgres',
-        'HOST': 'localhost',
-    },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'test_db',
+#         'USER': 'postgres',
+#         'HOST': 'localhost',
+#     },
+# }
 
 
 #메일 설정 비밀키 윈도우에서  json파일 가져오기
