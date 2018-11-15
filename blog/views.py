@@ -4,16 +4,17 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 
+
 from .models import Post, Category
 from .forms import PostForm
-from .context_processors import category_context
+from .context_processors import blog_custom_context
 from .paginator import CustomPaginator, page_range_check
 
 User = get_user_model()
 
 
 def post_list(request):
-    category = category_context(request)['category_title']
+    category = blog_custom_context(request)['category_title']
     page = int(request.GET.get('page', 1))
 
     if category:
@@ -59,7 +60,7 @@ def post_detail(request, pk):
 
 @login_required
 def post_new(request):
-    category = category_context(request)['category_title']
+    category = blog_custom_context(request)['category_title']
     if category:
         try:
             category_q = Category.objects.get(title=category)

@@ -4,7 +4,6 @@
         <h1>확인 Email이 발송됩니다.</h1>
         <p>
             요청하신 {{ email }} 주소로 가입 확인 메일이 발송되었습니다.<br>
-            <a href="/users/email_checker/?user_id={{ user.id }}&hash={{ hashed_value | urlencode }}">이메일확인</a>
         </p>
     </div>
 {% endblock %}

@@ -32,7 +32,7 @@ def main_view(request):
         get_lid_value_delta = timedelta(minutes=get_lid_value)
         now -= get_lid_value_delta
         for i in range(10):
-            image_list.append(now.strftime("%Y-%m-%d_%H%M"))
+            image_list.append(now.strftime("%Y/%m/%d/%H%M"))
             now -= m_delta
 
     return render(request, './scenery/main.html', {

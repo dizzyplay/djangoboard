@@ -1,9 +1,33 @@
 {% extends 'layout.html' %}
 {% block content %}
-    <div class="container mb-6">
-        <h1>죄송합니다.</h1>
+    <div class="container mt-6">
         <p>
             {{ reject }}<br>
+        </p>
+        <p>
+            {% if form.errors %}
+                <h1>죄송합니다</h1>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <ul>
+                            <li>
+                                {{ error | escape }}
+                            </li>
+                        </ul>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+
+        </p>
+        <p>
+            {% for error in form.non_field_errors %}
+                <h1>non field error</h1>
+                <ul>
+                    <li>
+                        {{ error | escape }}
+                    </li>
+                </ul>
+            {% endfor %}
         </p>
     </div>
 {% endblock %}

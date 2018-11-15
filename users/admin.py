@@ -8,5 +8,5 @@ from .models import Profile
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     model = Profile
-    list_display = ('id', 'nickname', 'user', 'status')
+    list_display = ('nickname', 'user', 'status')
     ordering = ['-id']
