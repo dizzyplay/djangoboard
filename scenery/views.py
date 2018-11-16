@@ -25,7 +25,7 @@ def main_view(request):
     image_list = []
     if now.minute % m_int == 0:
         for i in range(10):
-            image_list.append(now.strftime("%Y-%m-%d_%H%M"))
+            image_list.append(now.strftime("%Y/%m/%d/%H%M"))
             now -= m_delta
     else:
         get_lid_value = now.minute % m_int
