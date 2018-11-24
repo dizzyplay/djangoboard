@@ -1,15 +1,27 @@
 from django.shortcuts import render
-from . import forms
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+from .serializers import ImageListSerializer
+from .models import Image
 
 
-# Create your views here.
+class ImageAPIView(APIView):
+    serializer_class = ImageListSerializer
+
+    def get(self, request):
+        qs = Image.objects.all()
+        serializer = ImageListSerializer(qs, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = ImageListSerializer(data=request.data)
+        print(serializer)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response()
 
 
-def image_upload(request):
-    form = forms.ImageForm()
-    if request.method == 'POST':
-        post_pk = request.POST.get('pk')
-
-    return render(request, 'image/upload_photo.html', {
-        'form': form,
-    })
+image_upload = ImageAPIView.as_view()

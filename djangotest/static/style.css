@@ -22,3 +22,10 @@
 .helptext{
     font-size: xx-small;
 }
+
+.divInputContent{
+    max-height: 400px;
+    border: 1px solid;
+    overflow: auto;
+    height: 400px;
+}

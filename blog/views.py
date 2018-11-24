@@ -108,5 +108,6 @@ def post_edit(request, pk):
                 return redirect(post)
     form = PostForm(instance=post)
     return render(request, 'blog/post_form.html', {
-        'form': form
+        'form': form,
+        'post':post,
     })

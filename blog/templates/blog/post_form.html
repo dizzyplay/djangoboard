@@ -2,12 +2,76 @@
 
 {% block content %}
     <div class="container">
-        <form method="post" action="">
+        <form method="post" action="" onsubmit="return getContent()">
             <div class="form-group">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit" class="btn btn-primary">작성</button>
             </div>
         </form>
+    <div id="upload-image-list">
+
     </div>
+        {% if post.image_set.all %}
+            {% for image in post.image_set.all %}
+                <img src="{{ image.photo.url }}" width="50"> {{ image }}<br>
+            {% endfor %}
+        {% endif %}
+        <form method="post" enctype="multipart/form-data">
+            <img>
+            <input type="file" onchange="previewFile()">
+            <button class="btn btn-primary btn-sm" id="sendData" disabled>업로드</button>
+        </form>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <script>
+        function getContent() {
+            document.getElementById("upload-image-list").value = document.getElementById("divContent").innerHTML
+        }
+
+        function previewFile() {
+            let preview = document.querySelector('img');
+            let file = document.querySelector('input[type=file]').files[0];
+            let reader = new FileReader();
+            let button = document.getElementById('sendData')
+
+            reader.onloadend = function () {
+                preview.src = reader.result;
+                preview.width = 100;
+            }
+            if (file) {
+                reader.readAsDataURL(file)
+                button.disabled = false;
+            } else {
+                preview.src = "";
+            }
+        }
+
+        document.getElementById('sendData').addEventListener('click', function (e) {
+            e.preventDefault()
+            let file = document.querySelector('input[type=file]').files[0];
+            let datas = new FormData();
+            let url = "http://localhost:8000"
+            datas.append('photo', file)
+            datas.append('post', '{{ post.id }}')
+            $.ajax({
+                type: "POST",
+                {#contentType: 'multipart/form-data',#}
+                {#dataType: 'json',#}
+                url: url + '/image/upload/',
+                data: datas,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    let textarea = document.querySelector('textarea')
+                    let img = document.createElement("img")
+                    textarea.append(data.photo, img)
+                    img.src = url + data.photo
+                    console.log(textarea)
+                    console.log(data.photo)
+                }
+            })
+        })
+    </script>
 {% endblock %}
