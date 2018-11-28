@@ -48,18 +48,21 @@
             }
         }
 
+        function getHostUrl(){
+            return "http://" + window.location.host
+        }
         document.getElementById('sendData').addEventListener('click', function (e) {
             e.preventDefault()
             let file = document.querySelector('input[type=file]').files[0];
             let datas = new FormData();
-            let url = "http://localhost:8000"
+            {#let url = "http://localhost:8000"#}
             datas.append('photo', file)
             datas.append('post', '{{ post.id }}')
             $.ajax({
                 type: "POST",
                 {#contentType: 'multipart/form-data',#}
                 {#dataType: 'json',#}
-                url: url + '/image/upload/',
+                url: getHostUrl() + '/image/upload/',
                 data: datas,
                 contentType: false,
                 processData: false,
@@ -67,7 +70,7 @@
                     let textarea = document.querySelector('textarea')
                     let img = document.createElement("img")
                     textarea.append(data.photo, img)
-                    img.src = url + data.photo
+                    img.src = getHostUrl() + data.photo
                     console.log(textarea)
                     console.log(data.photo)
                 }
