@@ -136,13 +136,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'djangotest','static')
 ]
 
-CORS_ORIGIN_WHITELIST = (
-    '211.114.88.77',
-    'localhost:8000',
-    '127.0.0.1:8000',
-    'localhost:3000',
-    'www.rasbp.site',
-)
+
 
 # for csrf failure
 REST_FRAMEWORK = {

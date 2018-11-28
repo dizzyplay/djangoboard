@@ -42,3 +42,12 @@ EMAIL_HOST_PASSWORD = email_host_password
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = email_host_user
+
+CORS_ORIGIN_WHITELIST = (
+    '211.114.88.77',
+    'localhost:8000',
+    '127.0.0.1:8000',
+    'localhost:3000',
+    'www.rasbp.site',
+    'localhost:8080',
+)
