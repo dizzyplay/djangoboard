@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'consulting',
     'scenery',
     'image',
+    'comment',
 ]
 
 MIDDLEWARE = [
