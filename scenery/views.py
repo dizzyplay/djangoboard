@@ -38,3 +38,4 @@ def main_view(request):
     return render(request, './scenery/main.html', {
         'image_list': image_list,
     })
+
