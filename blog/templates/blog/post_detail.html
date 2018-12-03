@@ -15,6 +15,11 @@
                 <p>
                     {{ post.content | linebreaks }}
                 </p>
+            <p>[댓글]<br>
+               {% for comment in comments %}
+                 {{ comment.content }} - {{ comment.created_at }}<br>
+              {% endfor %}
+            </p>
             </div>
         </div>
     </div>

@@ -40,6 +40,7 @@ def post_list(request):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
+    comments = post.comments
     page = int(request.GET.get('page', 1))
     category = post.category
     if category:
@@ -49,8 +50,10 @@ def post_detail(request, pk):
         qs = p.get_page(page)
         page_start, page_end = page_range_check(page, p.num_pages)
 
+
     return render(request, 'blog/post_detail.html', {
         "post": post,
+        "comments": comments,
         "category_title": post.category,
         "pages": p,
         "prange": p.custom_page_range(int(page_start), int(page_end)),
