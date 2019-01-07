@@ -39,11 +39,9 @@
                     <span class="badge badge-pill badge-warning">게시판</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=자유">자유</a>
-                    <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=컴퓨터">컴퓨터</a>
-                    <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=게임">게임</a>
-                    <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=영화">영화</a>
-                    <a class="dropdown-item" href="{% url 'blog:post_list' %}?category=자동차">자동차</a>
+                  {% for ca in category_list %}
+                    <a class="dropdown-item" href="{% url 'blog:post_list' %}?category={{ ca.title }}">{{ ca.title }}</a>
+                  {% endfor %}
                 </div>
             </li>
         </ul>
@@ -81,10 +79,6 @@
             <div class="form-group">
                 {% csrf_token %}
                 {{ login_form }}
-{#                <label for="inputId">사용자ID</label>#}
-{#                <input type="text" name="username" class="form-control form-control-sm" id="inputId" required>#}
-{#                <label for="inputPassword">비밀번호</label>#}
-{#                <input type="password" name="password" class="form-control form-control-sm" id="inputPassword" required>#}
             </div>
             <input type="submit" class="btn btn-primary btn-sm btn-block" value="로그인">
         </form>

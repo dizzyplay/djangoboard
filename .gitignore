@@ -9,4 +9,5 @@ venv/
 secret.json
 server.bat
 secret.sh
+db_user.sh
 media/

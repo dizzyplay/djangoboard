@@ -27,7 +27,7 @@ def post_list(request):
         except ObjectDoesNotExist:
             print('object does not exist!!!')
     else:
-        category_q = Category.objects.get(title='자유')
+        category_q = Category.objects.get(title='free')
         qs = Post.objects.filter(category=category_q)
     return render(request, 'blog/post_list.html',
                   {

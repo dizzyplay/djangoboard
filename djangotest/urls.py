@@ -19,16 +19,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.http import HttpResponse
 
+
 def main(request):
     return HttpResponse('<h1>Hello</h1>')
+
 
 urlpatterns = [
     path('', main, name='main'),
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls', namespace='blog')),
     path('users/', include('users.urls', namespace='users')),
-    path('consulting/', include('consulting.urls', namespace='consulting')),
-    path('scenery/', include('scenery.urls', namespace='scenery')),
     path('image/', include('image.urls', namespace='image')),
 ]
 

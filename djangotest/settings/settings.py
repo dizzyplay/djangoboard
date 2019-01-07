@@ -42,8 +42,6 @@ INSTALLED_APPS = [
     'background_task',
     'blog',
     'users',
-    'consulting',
-    'scenery',
     'image',
     'comment',
 ]

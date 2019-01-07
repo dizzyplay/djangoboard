@@ -1,4 +1,5 @@
 from .settings import *
+import os
 import json
 
 DEBUG = True
@@ -16,14 +17,14 @@ DEBUG = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'raspi_test_db',
-        'USER': 'postgres',
+        'NAME': os.environ.get('DB_NAME', None),
+        'USER': os.environ.get('DB_USER', None),
+        'PASSWORD': os.environ.get('DB_PASSWORD', None),
         'HOST': 'localhost',
     },
 }
 
-
-#메일 설정 비밀키 윈도우에서  json파일 가져오기
+# 메일 설정 비밀키 윈도우에서  json파일 가져오기
 # try:
 #     with open(BASE_DIR+"\secret.json","r") as f:
 #         secrets = json.loads(f.read())
@@ -31,9 +32,8 @@ DATABASES = {
 #     email_host_password=secrets["EMAIL_HOST_PASSWORD"]
 # except:#리눅스/맥에서 환경변수로 메일설정 비밀키 가져오기
 
-email_host_user=os.environ.get("EMAIL_HOST_USER", "")
-email_host_password=os.environ.get("EMAIL_USER_PASSWORD", "")
-
+email_host_user = os.environ.get("EMAIL_HOST_USER", "")
+email_host_password = os.environ.get("EMAIL_USER_PASSWORD", "")
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = "smtp.gmail.com"
