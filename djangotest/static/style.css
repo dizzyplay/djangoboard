@@ -29,3 +29,15 @@
     overflow: auto;
     height: 400px;
 }
+
+.noti{
+    padding: 10px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.invisible{
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 10s, opacity 10s linear;
+}

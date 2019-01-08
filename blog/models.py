@@ -12,7 +12,6 @@ class Category(models.Model):
 
 
 class Post(models.Model):
-
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     content = models.TextField()
@@ -36,8 +35,5 @@ class Post(models.Model):
     def comments(self):
         qs = Comment.objects.filter_by_post(self)
         return qs
-
-
-
 
 
