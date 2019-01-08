@@ -25,7 +25,7 @@ class NotiConsumer(AsyncWebsocketConsumer):
 
     async def broadcast_new_post(self, event):
         await self.send(text_data=json.dumps({
-            'message': '새로운 글이 등록되었습니',
+            'message': '새로운 글이 등록되었습니다',
             'title': event['title'],
             'post_id': event['post_id']
             })
