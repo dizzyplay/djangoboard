@@ -10,7 +10,9 @@ nSocket.onmessage = function (e) {
   let data = JSON.parse(e.data)
   let noti = document.getElementById('newPostNoti')
   let div = document.createElement('div')
-  noti.innerText = data.message
+  let post_url = test.slice(0, -2) + data.post_id + '/'
+  noti.innerHTML =
+    `${data.message} - <a href="${post_url}"> 제목: [${data.title}]</a> `
   noti.classList.remove('invisible')
   noti.classList.remove('aos-animate')
 
@@ -18,10 +20,10 @@ nSocket.onmessage = function (e) {
   noti.append(div)
   setTimeout(() => {
     noti.classList.remove('aos-animate')
-  }, 5000)
+  }, 1000 * 15)
 }
 let noti = document.getElementById('newPostNoti')
 noti.addEventListener('click', () => {
-  noti.classList.remove('aos-animate')
+    noti.classList.remove('aos-animate')
   }
 )

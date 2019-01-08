@@ -8,7 +8,9 @@ from .consumers import get_groupname
 
 
 @receiver(post_save, sender=Post)
-def test(sender, created, **kwargs):
+def test(sender, created, instance, **kwargs):
+    title = instance.title
+    print(title)
     if created:
         channel_layer = get_channel_layer()
         group_name = get_groupname()
@@ -16,7 +18,8 @@ def test(sender, created, **kwargs):
             group_name,
             {
                 'type': 'broadcast_new_post',
-                'message':'test'
+                'title': instance.title,
+                'post_id': instance.id,
             }
 
         )
