@@ -13,8 +13,6 @@ class NotiConsumer(AsyncWebsocketConsumer):
             self.connected_group,
             self.channel_name
         )
-
-        print('successfully connected')
         await self.accept()
 
     async def disconnect(self, code):
@@ -23,7 +21,7 @@ class NotiConsumer(AsyncWebsocketConsumer):
             self.channel_name
         )
 
-    async def broadcast_new_post(self, event):
+    async def notification_new(self, event):
         await self.send(text_data=json.dumps({
             'message': '새로운 글이 등록되었습니다',
             'title': event['title'],

@@ -17,7 +17,7 @@ def test(sender, created, instance, **kwargs):
         async_to_sync(channel_layer.group_send)(
             group_name,
             {
-                'type': 'broadcast_new_post',
+                'type': 'notification.new',
                 'title': instance.title,
                 'post_id': instance.id,
             }
