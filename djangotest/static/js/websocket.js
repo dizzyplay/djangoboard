@@ -17,7 +17,6 @@ nSocket.onmessage = function (e) {
   div.setAttribute('data-aos', 'flip-up')
   noti.append(div)
   setTimeout(() => {
-    noti.classList.remove('invisible')
     noti.classList.remove('aos-animate')
   }, 5000)
 }
