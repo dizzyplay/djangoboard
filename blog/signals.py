@@ -9,13 +9,14 @@ from .consumers import get_groupname
 
 @receiver(post_save, sender=Post)
 def test(sender, created, **kwargs):
-    channel_layer = get_channel_layer()
-    group_name = get_groupname()
-    async_to_sync(channel_layer.group_send)(
-        group_name,
-        {
-            'type': 'broadcast_new_post',
-            'message':'test'
-        }
+    if created:
+        channel_layer = get_channel_layer()
+        group_name = get_groupname()
+        async_to_sync(channel_layer.group_send)(
+            group_name,
+            {
+                'type': 'broadcast_new_post',
+                'message':'test'
+            }
 
-    )
+        )
