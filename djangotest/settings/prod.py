@@ -27,6 +27,5 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 CORS_ORIGIN_WHITELIST = (
-    '211.114.88.77',
     'www.rasbp.site',
 )
