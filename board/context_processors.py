@@ -2,7 +2,7 @@ from users.forms import LoginForm, JoinForm
 from .models import Category
 
 
-def blog_custom_context(request):
+def board_custom_context(request):
     category_title = request.GET.get('category', None)
     login_form = LoginForm()
     join_form = JoinForm()

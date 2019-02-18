@@ -2,7 +2,7 @@ from .serializers import PostSerializer, PostListSerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework import status
-from blog.models import Post
+from board.models import Post
 
 
 class PostListAPIView(ListCreateAPIView):

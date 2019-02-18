@@ -23,7 +23,7 @@
     </div>
 {% endif %}
 <nav class="navbar navbar-expand-lg nav-bar-light bg-light">
-    <a class="navbar-brand" href="{% url 'blog:post_list' %}">Board </a>
+    <a class="navbar-brand" href="{% url 'board:post_list' %}">Board </a>
     {% if category_title %}
         <span class="badge badge-pill badge-default">{{ category_title }}</span>
     {% endif %}
@@ -40,7 +40,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   {% for ca in category_list %}
-                    <a class="dropdown-item" href="{% url 'blog:post_list' %}?category={{ ca.title }}">{{ ca.title }}</a>
+                    <a class="dropdown-item" href="{% url 'board:post_list' %}?category={{ ca.title }}">{{ ca.title }}</a>
                   {% endfor %}
                 </div>
             </li>

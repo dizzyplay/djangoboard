@@ -27,7 +27,7 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blog:post_detail', args=[self.pk])
+        return reverse('board:post_detail', args=[self.pk])
 
     def short_date(self):
         return self.created_at.strftime("%y/%m/%d")

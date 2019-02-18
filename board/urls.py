@@ -2,7 +2,7 @@ from django.urls import re_path, include
 from . import views
 
 
-app_name = 'blog'
+app_name = 'board'
 
 
 urlpatterns = [
@@ -12,5 +12,5 @@ urlpatterns = [
     re_path(r'^post_delete/(?P<pk>\d+)/', views.post_delete, name='post_delete'),
     re_path(r'^post_edit/(?P<pk>\d+)/', views.post_edit, name='post_edit'),
 
-    re_path(r'^api/', include('blog.api.urls', namespace='blog_api')),
+    re_path(r'^api/', include('board.api.urls', namespace='board_api')),
 ]

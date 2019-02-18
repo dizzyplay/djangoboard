@@ -7,14 +7,14 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Post, Category
 from .forms import PostForm
-from .context_processors import blog_custom_context
+from .context_processors import board_custom_context
 from .paginator import CustomPaginator, page_range_check
 
 User = get_user_model()
 
 
 def post_list(request):
-    category = blog_custom_context(request)['category_title']
+    category = board_custom_context(request)['category_title']
     page = int(request.GET.get('page', 1))
 
     if category:
@@ -29,7 +29,7 @@ def post_list(request):
     else:
         category_q = Category.objects.get(title='free')
         qs = Post.objects.filter(category=category_q)
-    return render(request, 'blog/post_list.html',
+    return render(request, 'board/post_list.html',
                   {
                       "qs": qs,
                       "pages": p,
@@ -51,7 +51,7 @@ def post_detail(request, pk):
         page_start, page_end = page_range_check(page, p.num_pages)
 
 
-    return render(request, 'blog/post_detail.html', {
+    return render(request, 'board/post_detail.html', {
         "post": post,
         "comments": comments,
         "category_title": post.category,
@@ -63,12 +63,12 @@ def post_detail(request, pk):
 
 @login_required
 def post_new(request):
-    category = blog_custom_context(request)['category_title']
+    category = board_custom_context(request)['category_title']
     if category:
         try:
             category_q = Category.objects.get(title=category)
         except ObjectDoesNotExist:
-            return redirect('blog:post_list')
+            return redirect('board:post_list')
 
     if request.method == 'POST':
         form = PostForm(request.POST)
@@ -78,11 +78,11 @@ def post_new(request):
             user_obj = User.objects.get(username=request.user)
             post.profile = user_obj.profile
             post = form.save()
-            return HttpResponseRedirect(reverse('blog:post_detail', kwargs={'pk': post.pk}))
+            return HttpResponseRedirect(reverse('board:post_detail', kwargs={'pk': post.pk}))
     else:
         form = PostForm()
 
-    return render(request, 'blog/post_form.html', {
+    return render(request, 'board/post_form.html', {
         'form': form,
     })
 
@@ -94,9 +94,9 @@ def post_delete(request, pk):
         if user_obj == request.user:
             post = Post.objects.get(pk=pk)
             post.delete()
-            return redirect('blog:post_list')
+            return redirect('board:post_list')
 
-    return redirect('blog:post_detail', pk)
+    return redirect('board:post_detail', pk)
 
 
 @login_required
@@ -110,7 +110,7 @@ def post_edit(request, pk):
                 post = form.save()
                 return redirect(post)
     form = PostForm(instance=post)
-    return render(request, 'blog/post_form.html', {
+    return render(request, 'board/post_form.html', {
         'form': form,
         'post':post,
     })

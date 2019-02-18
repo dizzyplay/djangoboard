@@ -61,7 +61,7 @@ def sign_up(request):
             return render(request, 'users/reject_your_info.html', {
                 'form': form,
             })
-    return redirect('blog:post_list')
+    return redirect('board:post_list')
 
 
 
@@ -78,7 +78,7 @@ def user_profile(request):
 @login_required
 def logout_view(request):
     logout(request)
-    return redirect('blog:post_list')
+    return redirect('board:post_list')
 
 
 def login_view(request):
@@ -93,7 +93,7 @@ def login_view(request):
             else:
                 login(request, user)
                 messages.success(request, '로그인성공')
-            return redirect('blog:post_list')
+            return redirect('board:post_list')
         else:
             messages.error(request, '아이디/비밀번호가 잘못 되었습니다.')
-    return redirect('blog:post_list')
+    return redirect('board:post_list')
