@@ -64,42 +64,6 @@ def sign_up(request):
     return redirect('blog:post_list')
 
 
-# def sign_up(request):
-#     if request.method == 'POST':
-#         email = request.POST.get('email', None)
-#         id = request.POST.get('username', None)
-#         nickname = request.POST.get('nickname', None)
-#         password = request.POST.get('password2', None)
-#
-#         check_email = Profile.objects.filter(email=email)
-#         check_nickname = Profile.objects.filter(nickname=nickname)
-#
-#         if len(check_email) + len(check_nickname) == 0:
-#             try:
-#                 password = make_password(password)
-#                 user = User.objects.create(username=id, password=password)
-#                 profile = Profile.objects.create(user=user, nickname=nickname, email=email, status=False)
-#                 post_dict={
-#                     'user_email': profile.email,
-#                     'username' : user.username,
-#                     'user_id' : user.id,
-#                     'hash':make_password(profile.email)
-#                 }
-#                 send_email_check(post_dict)
-#             except IntegrityError:
-#                 return render(request, 'users/reject_your_info.html', {
-#                     'reject': 'ID가 이미 존재합니다.'
-#                 })
-#         else:
-#             return render(request, 'users/reject_your_info.html', {
-#                 'reject': 'email 또는 닉네임이 존재합니다.'
-#             })
-#         print(profile.email)
-#         return render(request, 'users/confirm_your_info.html', {
-#             'email': email,
-#         })
-#     return render('blog:post_list')
-
 
 @login_required
 def user_profile(request):
