@@ -2,7 +2,7 @@
 =======
 사용 기술
 =====
-- django
+- Django 2.x.x
 - background_tasks
 - vanila javascript
 - bootstrap3
