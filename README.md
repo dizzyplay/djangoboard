@@ -28,3 +28,8 @@
 ----
 ![alt text](https://github.com/dizzyplay/djangoboard/blob/master/readme_image/5.png)
 ----
+
+### License
+djangobaord is primarily distributed under the terms of both the MIT license and the Apache License (Version 2.0).
+
+See LICENSE-APACHE and LICENSE-MIT for details.
